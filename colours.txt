@@ -1,0 +1,3 @@
+a = #5F9300
+a:hover = #FFF background: #CD3000
+dark red: #c51b01
