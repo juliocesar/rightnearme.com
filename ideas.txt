@@ -1,0 +1,2 @@
+* add store to home screen 
+* custom store home icon
