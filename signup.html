@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="description" content="Find stuff near you on your iPhone" />
     <meta name="author" content="awesomebydesign.com" />
-    <title>Right Near Me</title>
+    <title>Right Near Me - Sign up</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="/css/rightnearme.css" />
@@ -13,22 +13,20 @@
     <script src="/js/modernizr-1.5.min.js"></script>
   </head>
   <body class="home">
-    <img src="/img/iphone-vert.png" alt="iphone" />    
-    <h1>Right Near Me</h1>
-    <p>Create an iPhone accessible HTML5 app to sell or advertise your stuff in a few simple steps.</p>
-    <ul>
-      <li>Register for <strong>free</strong>.</li>
-      <li>Tell us who you are, upload a logo, and add products.</li>
-      <li>Your store is now bookmarkable. Looks just like a real app!</li>
-    </ul>
+    <h1>Sign up</h1>
     <p>
-      <a class="sign-up" href="signup.html">Sign me up!</a>
+      Tell us a bit about your business. You'll get to upload
+      a logo after your account is created.
     </p>
-    <div class="clearfix"></div>
-    <footer class="home">
-      <p>Made with ♥ by <a href="http://awesomebydesign.com">Julio Cesar Ody</a>, 
-        for <a href="http://railsrumble.com/">Rails Rumble 2010</a>.
-    </footer>
+    <form action="#" method="post" id="new-account">
+      <input id="email" type="email" name="email" placeholder="Your email address"/>
+      <input id="name" type="text" name="name" placeholder="Your business' name" />
+      <textarea id="description" name="description" placeholder="A short description"></textarea>
+      <input id="location" type="text" name="location" placeholder="Location. E.g.: 2 Campbell Pde, Bondi Beach, NSW Australia" />
+      <p>
+        <button type="submit">Create my account</button>
+      </p>
+    </form>
     <script src="/js/jquery-1.4.2.min.js"></script>
     <script src="/js/rightnearme.js"></script>
   </body>

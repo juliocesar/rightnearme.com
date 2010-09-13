@@ -14,7 +14,7 @@ time, mark, audio, video {
 article, aside, figure, footer, header, nav, section { display: block }
 body                    { font: 13px sans-serif; *font-size: small; *font: x-small; line-height: 1.22 }
 table                   { font-size: inherit; font: 100% }
-select, input, textarea { font: 99% sans-serif }
+select, input, textarea, button { font: 99% sans-serif }
 pre, code, kbd, samp    { font-family: monospace, sans-serif }
 
 h1, h2 { font-weight: bold }
@@ -25,6 +25,12 @@ a:link            { -webkit-tap-highlight-color: #FF5E99 }
 ::selection { background: #F400BF; color: #FFF; text-shadow: none }
 .ie7 img    { -ms-interpolation-mode: bicubic }
 ul { list-style-type: none; list-style-position: inside }
+body, input, button, textarea { font-size: 100%; font-weight: normal }
+label, input[type=button], input[type=submit], button { cursor: pointer }
+button {  width: auto; overflow: visible }
+input[type="radio"] { vertical-align: text-bottom }
+input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline }
+.ie6 input { vertical-align: text-bottom }
 /* End reset */
 
 .clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden }
@@ -46,14 +52,16 @@ body.home     {
   padding: 110px 80px 20px; 
   margin: 0 auto; 
 }
-body.home h1  { font-size: 4em }
-body.home p   { font-size: 1.8em }
-body.home ul  { font-size: 1.6em; margin: 1em 0 }
+input, textarea, button { font-family: inherit }
+body.home h1  { font-size: 3em }
+body.home p   { font-size: 1.4em }
+body.home ul  { font-size: 1.4em; margin: 1em 0; list-style-type: square; }
 body.home img { float: left; margin-right: 1em }
 footer        { margin-top: 2em; text-shadow: 0px 1px 1px #000 }
-footer.home p { color: #6d1003; font-size: 1.4em }
+footer.home p { color: #6d1003; font-size: 1.2em }
 footer.home a { color: inherit; text-decoration: none; border-bottom: 1px dotted #6d1003 }
-a.sign-up     {
+a.sign-up, button {
+  border: 0;
   font-style: italic;
   font-weight: 600;
   font-size: 1.4em;
@@ -69,4 +77,13 @@ a.sign-up     {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5D201), to(#f5a101));
   background: -moz-linear-gradient(0% 100% 90deg,#f5a101, #F5D201)
 }
+form input, 
+form textarea         { border: 2px solid #6D1003; padding: 0.3em; margin: 0.5em 0 }
 
+#new-account input,
+#new-account textarea { font-size: 1.2em; display: block }
+#new-account #email         { width: 15em }
+#new-account #name,
+#new-account #description   { width: 20em }
+#new-account #description   { height: 5em }
+#new-account #location      { width: 25em }
