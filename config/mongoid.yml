@@ -1,0 +1,12 @@
+defaults: &defaults
+  host: localhost
+  raise_not_found_error: true
+  skip_version_check: true
+  
+development:
+  <<: *defaults
+  database: rightnearme_development
+
+test:
+  <<: *defaults
+  database: rightnearme_test

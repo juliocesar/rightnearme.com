@@ -1,4 +1,7 @@
-require 'config/boot'
+require File.dirname(__FILE__) + '/config/boot'
 
-set :run => true
-set :public => File.dirname(__FILE__) + '/public'
+configure do
+  enable :run
+  set :public => File.dirname(__FILE__) + '/public'
+end
+
