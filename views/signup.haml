@@ -1,0 +1,11 @@
+%h1 Sign up
+%p
+  Tell us a bit about your business. You'll get to upload
+  a logo after your account is created.
+%form(action="/accounts" method="post" id="new-account")
+  %input#email(type="email" name="email" placeholder="Your email address")
+  %input#name(type="text" name="name" placeholder="Your business' name")
+  %textarea#description(name="description" placeholder="A short description")
+  %input#location(type="text" name="location" placeholder="Location. E.g.: 2 Campbell Pde, Bondi Beach, NSW Australia")
+  %p
+    %button(type="submit") Create my account

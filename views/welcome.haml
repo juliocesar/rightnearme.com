@@ -1,0 +1,18 @@
+!!! 5
+%html
+  %head
+    %meta(charset="utf-8")
+    %meta(name="description" content="Find stuff near you on your iPhone")
+    %meta(name="author" content="awesomebydesign.com")
+    %link(rel="shortcut icon" href="/favicon.ico")
+    %link(rel="apple-touch-icon" href="/apple-touch-icon.png")
+    %link(rel="stylesheet" href="/css/rightnearme.css")
+    %script(src="http://use.typekit.com/ljl7gkk.js")
+    <script>try{Typekit.load();}catch(e){}</script>
+    %script(src="/js/modernizr-1.5.min.js")
+    %title Right Near Me
+  %body(class="home")
+    = yield
+    %script(src="/js/jquery-1.4.2.min.js")
+    %script(src="/js/rightnearme.js")
+
