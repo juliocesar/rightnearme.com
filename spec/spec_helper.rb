@@ -1,7 +1,9 @@
-require File.dirname(__FILE__) + '/../config/boot'
+require 'bundler/setup'
+Bundler.require :default, :test
 require 'rspec'
 require 'machinist'
 require 'machinist/mongoid'
+require File.dirname(__FILE__) + '/../config/boot'
 
 RSpec.configure do |config|
   config.before(:each) { Machinist.reset_before_test }
