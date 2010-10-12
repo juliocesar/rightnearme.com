@@ -5,3 +5,10 @@ RSpec::Core::RakeTask.new do |task|
   task.rspec_opts = ["-c", "-f progress", "-r ./spec/spec_helper.rb"]
   task.pattern    = 'spec/**/*_spec.rb'
 end
+
+namespace :spec do
+  # Runs acceptance tests
+  task :acceptance do 
+    require File.dirname(__FILE__) + '/spec/acceptance_helper.rb'
+  end
+end
