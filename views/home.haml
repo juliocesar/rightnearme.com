@@ -7,6 +7,11 @@
   %li Your store is now bookmarkable. Looks just like a real app!
 %p
   %a.sign-up(href="/signup") Sign me up!
+%p#already-have-account
+  (I already have an account. Let me <a href="/signin">sign in</a>!)
+  %form#sign-in(action="/sessions" method="post")
+    %input#email(type="email" name="email" placeholder="Your email address")
+    %input#password(type="password" name="password" placeholder="Password")
 .clearfix
 %footer.home
   %p

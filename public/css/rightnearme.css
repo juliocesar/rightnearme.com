@@ -44,6 +44,7 @@ strong    { font-weight: 600 }
 input, textarea, button { font-family: inherit }
 form input, 
 form textarea           { border: 2px solid #6D1003; padding: 0.3em; margin: 0.5em 0 }
+a { color: #ECF81A; border-bottom: 1px dotted #ECF81A; text-decoration: none }
 
 /* Home page */
 body.home     { 
@@ -80,6 +81,9 @@ a.sign-up, button {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5D201), to(#f5a101));
   background: -moz-linear-gradient(0% 100% 90deg,#f5a101, #F5D201)
 }
+#already-have-account { margin-top: 1em }
+.js #sign-in { display: none }
+#sign-in input { width: 12em }
 
 #new-account input,
 #new-account textarea { font-size: 1.2em; display: block }

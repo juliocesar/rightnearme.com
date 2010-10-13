@@ -2,7 +2,7 @@
 %p
   Tell us a bit about your business. You'll get to upload
   a logo after your account is created.
-%form(action="/accounts" method="post" id="new-account")
+%form#new-account(action="/accounts" method="post")
   %input#email(type="email" name="email" placeholder="Your email address")
   %input#name(type="text" name="name" placeholder="Your business' name")
   %textarea#description(name="description" placeholder="A short description")

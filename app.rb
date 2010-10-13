@@ -18,7 +18,11 @@ get '/signup' do
 end
 
 post '/accounts' do
-  @store = Store.new params
-  @store.save!
+  begin
+    @store = Store.new params
+    @store.save!
+  rescue Mongoid::Errors::Validations
+    return haml :signup, :layout => :welcome
+  end
   redirect '/mystore'
 end

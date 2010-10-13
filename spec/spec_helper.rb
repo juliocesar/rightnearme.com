@@ -1,11 +1,11 @@
 require 'bundler/setup'
-Bundler.require :default, :test
+require 'sinatra'
+Sinatra::Application.environment = :test
+Bundler.require :default, Sinatra::Application.environment
 require 'rspec'
 require 'machinist'
 require 'machinist/mongoid'
 require File.dirname(__FILE__) + '/../config/boot'
-
-Sinatra::Application.environment = :test
 
 RSpec.configure do |config|
   config.before(:each) { Machinist.reset_before_test }
