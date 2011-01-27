@@ -7,6 +7,7 @@ end
 
 configure do
   enable :run
+  enable :sessions
 end
 
 get '/' do
