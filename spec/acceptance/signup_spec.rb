@@ -1,23 +1,21 @@
 require File.dirname(__FILE__) + '/../acceptance_helper'
 
-describe 'the login page' do
-  include Capybara  
-  
-  before do visit '/signup' end
-  
-  it 'should have a form' do
-    find(:css, 'form#new-account').should_not be_nil
+feature 'login' do
+  background do
+    visit '/signup'
   end
   
-  context 'signing up' do
-    it "redirects to the store admin interface upon the info being valid" do
-      signup Store.make
-      find(:css, 'form#new-account').should be_nil
-    end
-    
-    it "renders the signup page again if the data is invalid" do
-      signup Store.make(:empty)
-      find(:css, 'form#new-account').should_not be_nil
-    end
+  scenario 'should have a form' do
+    page.should have_css('form#new-account')
   end
+  
+  scenario 'signing up with valid data' do
+    signup Store.make
+    page.should_not have_css('form#new-account')
+  end
+  
+  scenario 'invalid data' do
+    signup Store.make(:empty)
+    page.should have_css('form#new-account')
+  end    
 end

@@ -19,8 +19,8 @@ Store.blueprint do
 end
 
 Store.blueprint :empty do
-  name { nil }
-  email { nil}
+  name        { nil }
+  email       { nil }
   description { nil }
-  location { nil }
+  location    { nil }
 end

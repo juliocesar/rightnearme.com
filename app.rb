@@ -10,6 +10,11 @@ configure do
   enable :sessions
 end
 
+get '/mystore' do
+  # login_required
+  haml :mystore, :layout => false
+end
+
 get '/' do
   haml :home, :layout => :welcome
 end
@@ -22,6 +27,7 @@ post '/accounts' do
   begin
     @store = Store.new params
     @store.save!
+    session[:store] = @store.id
   rescue Mongoid::Errors::Validations
     return haml :signup, :layout => :welcome
   end

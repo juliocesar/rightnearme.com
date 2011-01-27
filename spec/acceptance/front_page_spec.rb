@@ -1,10 +1,11 @@
 require File.dirname(__FILE__) + '/../acceptance_helper'
 
-describe 'the front page' do
-  include Capybara  
-  before do visit '/' end
+feature 'front page' do
+  background do
+    visit '/'
+  end
   
-  it 'should have a sign me up button' do
-    find(:css, 'a.sign-up').should_not be_nil
+  scenario 'should have a sign me up button' do
+    page.should have_css('a.sign-up')
   end
 end
