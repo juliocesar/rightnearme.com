@@ -21,6 +21,7 @@ h1, h2 { font-weight: bold }
 html  { -webkit-font-smoothing: antialiased }
 a:hover, a:active, a { outline: none }
 a:link            { -webkit-tap-highlight-color: #FF5E99 }
+a, label  { cursor: pointer }
 ::-moz-selection{ background: #F400BF; color: #FFF; text-shadow: none }
 ::selection { background: #F400BF; color: #FFF; text-shadow: none }
 .ie7 img    { -ms-interpolation-mode: bicubic }
@@ -99,7 +100,10 @@ a.sign-up, button {
 #panel header h1 { font-size: 2.5em }
 #panel h1 { font-size: 2em }
 
+h1 a.action { display: inline-block; font-size: 50% }
+
 /* new product form */
+#new-product          { display: none }
 #new-product > *      { display: block }
 #product-name         { width: 20em }
 #product-description  { width: 20em; height: 4em }

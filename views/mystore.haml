@@ -14,12 +14,14 @@
   %body
     %section#panel
       %header
-        %h1= @store.name
+        %h1
+          = @store.name
+          %a.action Edit
         %p At #{@store.location}
-        %p
-          %a Edit profile
       #products
-        %h1 Products
+        %h1 
+          Products
+          %a#add-new.action Add new
         %form#new-product
           %input(type="text" id="product-name" placeholder="New product name")
           %textarea(id="product-description" placeholder="Description")

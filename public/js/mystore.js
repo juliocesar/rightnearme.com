@@ -31,7 +31,8 @@ $(document).ready(function() {
     el: $('#panel'),
     profileTemplate: _.template($('#profile-template').html()),
     events: {
-      'submit #new-product':  "createProduct"
+      'submit #new-product':  'createProduct',
+      'click #add-new':       'addNew'
     },
     initialize: function() {
       _.bindAll(this, 'addOne', 'addAll', 'render');
@@ -47,6 +48,13 @@ $(document).ready(function() {
     createProduct: function(e) {
       e.preventDefault();
       Products.create(this.newAttributes());
+    },
+    addNew: function(e) {
+      if ($('#new-product:visible').length) {
+        $('#new-product').fadeOut();
+      } else {
+        $('#new-product').fadeIn();
+      }
     },
     newAttributes: function() {
       return {
