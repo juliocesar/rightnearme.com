@@ -46,18 +46,11 @@ form input,
 form textarea           { border: 2px solid #6D1003; padding: 0.3em; margin: 0.5em 0 }
 a { color: #ECF81A; border-bottom: 1px dotted #ECF81A; text-decoration: none }
 
+body { font-family: 'urbana-1'; font-weight: 300; background: url(/img/glow.png) top no-repeat }
+
 /* Home page */
-body.home     { 
-/*  background: transparent url(/img/glow.png)  top no-repeat;*/
-  font-family: 'urbana-1';
-  font-weight: 300;
-  background: url(/img/glow.png) top no-repeat;
-  width: 600px;
-  min-height: 600px;
-  padding: 110px 80px 20px; 
-  margin: 0 auto; 
-}
 #steps { margin: 1em 0 }
+body.home     { width: 600px; min-height: 600px; padding: 110px 80px 20px; margin: 0 auto }
 body.home h1  { font-size: 3em }
 body.home p   { font-size: 1.4em }
 body.home ul  { font-size: 1.4em; margin: 1em 0; list-style-type: square }
@@ -92,3 +85,22 @@ a.sign-up, button {
 #new-account #description   { width: 20em }
 #new-account #description   { height: 5em }
 #new-account #location      { width: 25em }
+
+#panel { 
+  width: 760px; 
+  margin: 0 auto; 
+  background: #A61905; 
+  border-color: #891504; 
+  border-width: 0 2px 2px 2px;
+  border-style: solid;
+}
+#panel > * { padding: 0 1em }
+#panel header { padding: 1em 1em }
+#panel header h1 { font-size: 2.5em }
+#panel h1 { font-size: 2em }
+
+/* new product form */
+#new-product > *      { display: block }
+#product-name         { width: 20em }
+#product-description  { width: 20em; height: 4em }
+#product-price        { width: 5em }

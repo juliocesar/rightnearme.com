@@ -21,3 +21,4 @@ def signup store
   fill_in 'location',     :with => store.location
   click_button 'Create my account'
 end
+
