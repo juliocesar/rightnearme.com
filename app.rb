@@ -19,22 +19,38 @@ end
 get '/mystore' do
   @store = Store.last
   # login_required
-  haml :mystore, :layout => false
+  haml :mystore, layout: false
+end
+
+get '/products.json' do
+  @store = Store.last
+  content_type :json
+  @store.products.to_json
+end
+
+post '/products.json' do  
+  @store = Store.last
+  request.body.rewind
+  attributes = JSON.parse request.body.read
+  product = Product.new attributes
+  @store.products << product
+  @store.save!
+  content_type :json
+  product.to_json
 end
 
 get '/' do
-  haml :home, :layout => :welcome
+  haml :home, layout: :welcome
 end
 
 get '/signup' do
-  haml :signup, :layout => :welcome
+  haml :signup, layout: :welcome
 end
 
 post '/accounts' do
   begin
     @store = Store.new params
     @store.save!
-    puts @store.inspect
     session[:store] = @store.id
   rescue Mongoid::Errors::Validations
     return haml :signup, layout: :welcome

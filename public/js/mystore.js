@@ -1,20 +1,35 @@
 $(document).ready(function() {
+  
   Product = Backbone.Model.extend({
     clear: function() {
       this.destroy();
       this.view.remove();
+    },
+    validate: function(attributes) {
+      if (attributes.price) {
+        if (!parseFloat(attributes.price)) {
+          return "asdasd";
+        }
+      }
+    },
+    error: function(error) {
+      alert('omg');
+      window.mod = model;
+      window.err = error;
+      
     }
   });
   
   ProductList = Backbone.Collection.extend({
     model: Product,
-    localStorage: new Store('products')
+    url: '/products.json'
+    // localStorage: new Store('products')
   });
   
   Products = new ProductList;
   
   ProductView = Backbone.View.extend({
-    tagName: 'li',
+    tagName: 'tr',
     template: _.template($('#product-template').html()),    
     initialize: function() {
       _.bindAll(this, 'render');
@@ -50,11 +65,8 @@ $(document).ready(function() {
       Products.create(this.newAttributes());
     },
     addNew: function(e) {
-      if ($('#new-product:visible').length) {
-        $('#new-product').fadeOut();
-      } else {
+      $('#new-product:visible').length ? $('#new-product').fadeOut(100) : 
         $('#new-product').fadeIn();
-      }
     },
     newAttributes: function() {
       return {
@@ -64,9 +76,7 @@ $(document).ready(function() {
       };
     },
     addOne: function(product) {
-      window.foo = product;
       var view = new ProductView({model: product});
-      window.bar = view;
       this.$("#products-list").append(view.render().el);
     },
     addAll: function() {

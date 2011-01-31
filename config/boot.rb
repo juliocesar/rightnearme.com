@@ -7,6 +7,7 @@ require 'mongoid'
 require 'yaml'
 
 require File.dirname(__FILE__) + '/../lib/store'
+require File.dirname(__FILE__) + '/../lib/product'
 
 set :root, File.expand_path(File.dirname(__FILE__) + '/..')
 set :public => Sinatra::Application.root + '/public',

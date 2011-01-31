@@ -27,14 +27,14 @@
           %textarea(id="product-description" placeholder="Description")
           %input(type="text" id="product-price" placeholder="Price (if any)")
           %button(type="submit") Add new
-        %ul#products-list
+        %table#products-list(cellspacing="0" cellpadding="0")
     %script(src="/js/jquery-1.4.4.min.js")
     %script(src="/js/underscore-min.js")    
     %script(src="/js/backbone-min.js")
-    %script(src="/js/backbone-localstorage.js")    
+    / %script(src="/js/backbone-localstorage.js")    
     %script(src="/js/mystore.js")
     %script(type="text/template" id="product-template")
-      <%= name %>
+      <td class="name"><a><%= name %></a></td><td class="price"><%= price %></td>
     %script(type="text/template" id="profile-template")
       <h1><%= name %></h1>
       <p>At <%= location %></p>
