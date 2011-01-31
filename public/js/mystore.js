@@ -1,6 +1,9 @@
 $(document).ready(function() {
   
   Product = Backbone.Model.extend({
+    initialize: function() {
+      this.bind('error', this.error);
+    },
     clear: function() {
       this.destroy();
       this.view.remove();
@@ -8,22 +11,21 @@ $(document).ready(function() {
     validate: function(attributes) {
       if (attributes.price) {
         if (!parseFloat(attributes.price)) {
-          return "asdasd";
+          return "price needs to be a number";
         }
       }
     },
-    error: function(error) {
-      alert('omg');
+    error: function(model, error) {
+      alert('invalid');
       window.mod = model;
-      window.err = error;
-      
+      window.err = error;      
     }
   });
   
   ProductList = Backbone.Collection.extend({
     model: Product,
-    url: '/products.json'
-    // localStorage: new Store('products')
+    // url: '/products.json'
+    localStorage: new Store('products')
   });
   
   Products = new ProductList;
@@ -72,7 +74,8 @@ $(document).ready(function() {
       return {
         name: $('#product-name').val(),
         description: $('#product-description').val(),
-        price: $('#product-price').val()
+        price: $('#product-price').val(),
+        collection: Products
       };
     },
     addOne: function(product) {
