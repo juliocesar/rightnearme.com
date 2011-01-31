@@ -169,6 +169,7 @@
       // Run validation.
       if (!options.silent && this.validate && !this._performValidation(attrs, options)) return false;
 
+
       // Check for changes of `id`.
       if ('id' in attrs) this.id = attrs.id;
 
