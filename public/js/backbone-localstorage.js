@@ -64,10 +64,7 @@ _.extend(Store.prototype, {
 
 // Override `Backbone.sync` to use delegate to the model or collection's
 // *localStorage* property, which should be an instance of `Store`.
-Backbone.sync = function(method, model, success, error) {
-  
-  console.log('syncing');
-
+Backbone.sync = function(method, model, success, error) {  
   var resp;
   var store = model.localStorage || model.collection.localStorage;
 
@@ -78,7 +75,7 @@ Backbone.sync = function(method, model, success, error) {
     case "delete":  resp = store.destroy(model);                           break;
   }
 
-  if (resp) {
+  if (resp && success && typeof success === 'function') {
     success(resp);
   } else {
     error("Record not found");

@@ -29,14 +29,20 @@ get '/products.json' do
 end
 
 post '/products.json' do  
+  content_type :json
   @store = Store.last
   request.body.rewind
   attributes = JSON.parse request.body.read
   product = Product.new attributes
   @store.products << product
-  @store.save!
-  content_type :json
-  product.to_json
+  begin
+    @store.save!
+    product.to_json
+  rescue Mongoid::Errors::Validations
+    status 500
+    product.errors.add :type, 'validation'
+    product.errors.to_json
+  end
 end
 
 get '/' do

@@ -96,11 +96,39 @@ a.sign-up, button {
   border-style: solid;
 }
 #panel > * { padding: 0 1em }
-#panel header { padding: 1em 1em }
+#panel header { padding: 1em 1em; margin-bottom: 1em }
 #panel header h1 { font-size: 2.5em }
 #panel h1 { font-size: 2em }
 
-h1 a.action { display: inline-block; font-size: 50% }
+nav#main ul { position: relative; clear: both; height: 2.2em }
+nav#main a {
+  line-height: 1.2em;
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+  width: 100%;
+  text-align: center;
+  font-weight: bold; 
+  color: #fff; 
+  border: 0 none;
+  display: block;
+  font-size: 1.2em;
+  padding: 0.3em 0.9em;
+  background: transparent;
+  overflow: visible;
+}
+nav#main li { float: left; width: 7em; overflow: visible }
+#currently {
+  width: 7em;
+  pointer-events: none;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+div.section { display: none; padding: 1em !important; background: rgba(0, 0, 0, 0.2) }
+div.section.active { display: block }
 
 /* new product form */
 #new-product          { display: none }
@@ -111,7 +139,6 @@ h1 a.action { display: inline-block; font-size: 50% }
 
 /* products list */
 #products-list    { width: 100% }
-#products-list tr { background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#961803), to(#C82004)) }
 #products-list td { padding: 0.5em; font-weight: bold; font-size: 1.2em }
 #products-list td.name  { width: 70% }
 #products-list td.price { width: 30%; text-align: right }

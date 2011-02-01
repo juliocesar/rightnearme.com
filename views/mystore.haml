@@ -14,24 +14,36 @@
   %body
     %section#panel
       %header
-        %h1
-          = @store.name
-          %a.action Edit
+        %h1= @store.name
         %p At #{@store.location}
-      #products
-        %h1 
-          Products
-          %a#add-new.action Add new
+      %nav#main
+        %ul
+          %li#currently
+          %li
+            %a#go-products(href="#!/") 
+              Products
+          %li
+            %a#go-profile(href="#!/profile") Profile
+          %li
+            %a#go-stats(href="#!/statistics") Statistics
+      .clearfix
+      #products.section.active
+        %a#add-new.action Add new
         %form#new-product
           %input(type="text" id="product-name" placeholder="New product name")
           %textarea(id="product-description" placeholder="Description")
           %input(type="text" id="product-price" placeholder="Price (if any)")
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
+      #profile.section
+        %form
+          foo
+      #statistics.section
+        %p stats
     %script(src="/js/jquery-1.4.4.min.js")
     %script(src="/js/underscore-min.js")    
     %script(src="/js/backbone.js")
-    %script(src="/js/backbone-localstorage.js")    
+    / %script(src="/js/backbone-localstorage.js")    
     %script(src="/js/mystore.js")
     %script(type="text/template" id="product-template")
       <td class="name"><a><%= name %></a></td><td class="price"><%= price %></td>

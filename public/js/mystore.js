@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
   Product = Backbone.Model.extend({
     initialize: function() {
       this.bind('error', this.error);
@@ -8,31 +8,21 @@ $(document).ready(function() {
       this.destroy();
       this.view.remove();
     },
-    validate: function(attributes) {
-      if (attributes.price) {
-        if (!parseFloat(attributes.price)) {
-          return "price needs to be a number";
-        }
-      }
-    },
-    error: function(model, error) {
-      alert('invalid');
-      window.mod = model;
-      window.err = error;      
+    error: function(model, xhr) {
+      
     }
   });
-  
+
   ProductList = Backbone.Collection.extend({
     model: Product,
-    // url: '/products.json'
-    localStorage: new Store('products')
+    url: '/products.json'
   });
-  
+
   Products = new ProductList;
-  
+
   ProductView = Backbone.View.extend({
     tagName: 'tr',
-    template: _.template($('#product-template').html()),    
+    template: _.template($('#product-template').html()),
     initialize: function() {
       _.bindAll(this, 'render');
       this.model.bind('change', this.render);
@@ -43,7 +33,7 @@ $(document).ready(function() {
       return this;
     }
   });
-  
+
   Application = Backbone.View.extend({
     el: $('#panel'),
     profileTemplate: _.template($('#profile-template').html()),
@@ -67,15 +57,14 @@ $(document).ready(function() {
       Products.create(this.newAttributes());
     },
     addNew: function(e) {
-      $('#new-product:visible').length ? $('#new-product').fadeOut(100) : 
+      $('#new-product:visible').length ? $('#new-product').fadeOut(100) :
         $('#new-product').fadeIn();
     },
     newAttributes: function() {
       return {
         name: $('#product-name').val(),
         description: $('#product-description').val(),
-        price: $('#product-price').val(),
-        collection: Products
+        price: $('#product-price').val()
       };
     },
     addOne: function(product) {
@@ -86,6 +75,44 @@ $(document).ready(function() {
       Products.each(this.addOne);
     }
   });
-  
+
   Admin = new Application;
+  
+  AdminController = Backbone.Controller.extend({
+    routes: { 
+      '!/':           'default',
+      '!/profile':    'profile',
+      '!/statistics': 'statistics'      
+    },
+    
+    default: function() {
+      $('#currently').animate({left: 0}, 200);
+      $('.section.active').removeClass('active');
+      $('#main a.active').removeClass('active');      
+      $('#go-products').addClass('active');
+      $('#products').addClass('active');
+    },
+    
+    profile: function() {
+      $('#currently').animate({left: $('#main a').outerWidth() * 1}, 200);
+      $('.section.active').removeClass('active');
+      $('#main a.active').removeClass('active');
+      $('#go-profile').addClass('active');
+      $('#profile').addClass('active');
+    },
+
+    statistics: function() {
+      $('#currently').animate({left: $('#main a').outerWidth() * 2}, 200);
+      $('.section.active').removeClass('active');
+      $('#main a.active').removeClass('active');
+      $('#go-stats').addClass('active');
+      $('#statistics').addClass('active');
+    },
+    
+    
+  });
+  
+  Controler = new AdminController;
+  Backbone.history.start()
+  
 });
