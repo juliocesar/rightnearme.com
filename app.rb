@@ -16,7 +16,7 @@ configure do
   enable :sessions
 end
 
-get '/mystore' do
+get '/mystore/' do
   @store = Store.last
   # login_required
   haml :mystore, layout: false
@@ -61,5 +61,5 @@ post '/accounts' do
   rescue Mongoid::Errors::Validations
     return haml :signup, layout: :welcome
   end
-  redirect '/mystore'
+  redirect '/mystore/'
 end

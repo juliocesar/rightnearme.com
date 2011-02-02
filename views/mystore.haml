@@ -15,7 +15,7 @@
     %section#panel
       %header
         %h1= @store.name
-        %p In: #{@store.location}
+        %p= @store.location
       %nav#main
         %ul
           %li#currently
@@ -28,7 +28,7 @@
             %a#go-stats(href="#!/statistics") Statistics
       .clearfix
       #products.section.active
-        %a#add-new.action Add new
+        %a#add-new.action + Add new
         %form#new-product
           %input(type="text" id="product-name" placeholder="New product name")
           %textarea(id="product-description" placeholder="Description")
@@ -36,8 +36,16 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form
-          foo
+        %form#edit-profile
+          %label(for="store-email") Email
+          %input#store-email(type="email" value="#{@store.email}")
+          %label(for="store-name") Name
+          %input#store-name(type="text" value="#{@store.name}")
+          %label(for="store-description") Description
+          %textarea#store-description= @store.description
+          %label(for="store-location") Location
+          %input#store-location(type="text" value="#{@store.location}")
+          %button(type="submit" disabled="disabled") Save Changes
       #statistics.section
         %p stats
     %script(src="/js/jquery-1.4.4.min.js")

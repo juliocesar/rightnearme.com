@@ -138,7 +138,19 @@ div.section.active { display: block }
 #product-price        { width: 5em }
 
 /* products list */
-#products-list    { width: 100% }
+#products-list    { width: 100%; margin-top: 1em }
 #products-list td { padding: 0.5em; font-weight: bold; font-size: 1.2em }
 #products-list td.name  { width: 70% }
-#products-list td.price { width: 30%; text-align: right }
+#products-list td.price { width: 30%; text-align: right; font-weight: normal }
+#products-list tr:nth-child(odd) { background: #741204 }
+
+/* profile form */
+#edit-profile > *   { display: block }
+#edit-profile input,
+#edit-profile textarea,
+#edit-profile label { font-size: 1.2em }
+#store-email        { width: 15em }
+#store-name,
+#store-description,
+#store-location     { width: 20em }
+#edit-profile button { margin-top: 1em }
