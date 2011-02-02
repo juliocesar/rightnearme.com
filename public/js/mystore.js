@@ -44,7 +44,7 @@ $(document).ready(function() {
     initialize: function() {
       _.bindAll(this, 'addOne', 'addAll', 'render');
       this.input = this.$('#new-product-name');
-      Products.bind('add', this.addOne);
+      Products.bind('add', this.addOne, this.showUndo, this.clearForm);
       Products.bind('refresh', this.addAll);
       Products.bind('all', this.render);
       Products.fetch();
@@ -70,6 +70,12 @@ $(document).ready(function() {
     addOne: function(product) {
       var view = new ProductView({model: product});
       this.$("#products-list").append(view.render().el);
+    },
+    showUndo: function(product) {
+      
+    },
+    clearForm: function() {
+      $('#new-product :input').val('');
     },
     addAll: function() {
       Products.each(this.addOne);
