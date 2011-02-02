@@ -35,14 +35,15 @@ post '/products.json' do
   attributes = JSON.parse request.body.read
   product = Product.new attributes
   @store.products << product
-  begin
+  # begin
     @store.save!
     product.to_json
-  rescue Mongoid::Errors::Validations
-    status 500
-    product.errors.add :type, 'validation'
-    product.errors.to_json
-  end
+  # rescue Mongoid::Errors::Validations
+  #   puts product.errors.inspect
+  #   status 500
+  #   product.errors.add :type, 'validation'
+  #   product.errors.to_json
+  # end
 end
 
 get '/' do

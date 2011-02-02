@@ -28,7 +28,14 @@
             %a#go-stats(href="#!/statistics") Statistics
       .clearfix
       #products.section.active
-        %a#add-new.action + Add new
+        %ul#products-menu
+          %li
+            %a#add-new + Add new
+          %li
+            %a#delete - Delete
+          %li
+            %input#search-products(type="text" placeholder="Search")
+        
         %form#new-product
           %input(type="text" id="product-name" placeholder="New product name")
           %textarea(id="product-description" placeholder="Description")

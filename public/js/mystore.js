@@ -44,7 +44,8 @@ $(document).ready(function() {
     initialize: function() {
       _.bindAll(this, 'addOne', 'addAll', 'render');
       this.input = this.$('#new-product-name');
-      Products.bind('add', this.addOne, this.showUndo, this.clearForm);
+      Products.bind('add', this.addOne);
+      Products.bind('add', this.clearForm);
       Products.bind('refresh', this.addAll);
       Products.bind('all', this.render);
       Products.fetch();

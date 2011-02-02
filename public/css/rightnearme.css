@@ -143,6 +143,9 @@ div.section.active { display: block }
 #products-list td.name  { width: 70% }
 #products-list td.price { width: 30%; text-align: right; font-weight: normal }
 #products-list tr:nth-child(odd) { background: #741204 }
+#products-menu li { display: inline; margin-right: 1em }
+#products-menu a  { display: inline-block; border: 0 none }
+
 
 /* profile form */
 #edit-profile > *   { display: block }
