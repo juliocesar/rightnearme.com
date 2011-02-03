@@ -25,7 +25,7 @@ end
 get '/products.json' do
   @store = Store.last
   content_type :json
-  @store.products.to_json
+  @store.products.to_json :methods => [:id]
 end
 
 delete '/products.json/:id' do
@@ -33,7 +33,7 @@ delete '/products.json/:id' do
   @store = Store.last
   @product = @store.products.find params[:id]
   @product.destroy
-  @product.to_json
+  @product.to_json :methods => [:id]
 end
 
 post '/products.json' do  
@@ -45,12 +45,12 @@ post '/products.json' do
   @store.products << product
   begin
     @store.save!
-    product.to_json
+    product.to_json :methods => [:id]
   rescue Mongoid::Errors::Validations
     puts product.errors.inspect
     status 500
     product.errors.add :type, 'validation'
-    product.errors.to_json
+    product.errors.to_json :methods => [:id]
   end
 end
 

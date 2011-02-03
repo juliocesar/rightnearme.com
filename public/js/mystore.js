@@ -2,7 +2,8 @@ $(document).ready(function() {
 
   Product = Backbone.Model.extend({
     initialize: function() {
-      this.id = this.get('_id');
+      // window.deeze = this;
+      // this.id = this.attributes._id;
     }
   });
 
@@ -32,6 +33,7 @@ $(document).ready(function() {
       this.model.view = this;
     },
     render: function() {
+      console.log(this.model.toJSON());
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
     },
