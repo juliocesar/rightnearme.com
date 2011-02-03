@@ -40,7 +40,7 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form#edit-profile(action="/profile.json" method="post")
+        %form#edit-profile
           %label(for="store-email") Email
           %input#store-email(type="email" value="#{@store.email}")
           %label(for="store-name") Name

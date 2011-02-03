@@ -1,13 +1,8 @@
 $(document).ready(function() {
-
   Product = Backbone.Model.extend({
-    initialize: function() {
-      // window.deeze = this;
-      // this.id = this.attributes._id;
-    }
   });
 
-  ProductList = Backbone.Collection.extend({
+  ProductsCollection = Backbone.Collection.extend({
     model: Product,
     url: '/products.json',
     selected: function() {
@@ -17,8 +12,7 @@ $(document).ready(function() {
       _.each(Products.selected(), function(product) { product.destroy(); });
     }
   });
-
-  Products = new ProductList;
+  Products = new ProductsCollection;
 
   ProductView = Backbone.View.extend({
     tagName: 'tr',
@@ -46,7 +40,7 @@ $(document).ready(function() {
     }
   });
 
-  ProductPanel = Backbone.View.extend({
+  ProductsUI = Backbone.View.extend({
     events: {
       'submit #new-product' :   'createProduct',
       'click #add-new'      :   'addNew',
@@ -68,15 +62,15 @@ $(document).ready(function() {
       e.preventDefault();
       Products.create(this.newAttributes());
     },
-    addNew: function(e) {
+    addNew: function() {
       $('#new-product:visible').length ? $('#new-product').fadeOut(100) :
         $('#new-product').fadeIn();
     },
     newAttributes: function() {
       return {
-        name: $('#product-name').val(),
-        description: $('#product-description').val(),
-        price: $('#product-price').val()
+        name        : $('#product-name').val(),
+        description : $('#product-description').val(),
+        price       : $('#product-price').val()
       };
     },
     addOne: function(product) {
@@ -94,7 +88,7 @@ $(document).ready(function() {
     }
   });
 
-  ProductsApp = new ProductPanel;
+  ProductsView = new ProductsUI;
   
   Profile = Backbone.Model.extend({
     clear :   $.noop,
@@ -103,10 +97,10 @@ $(document).ready(function() {
   
   Store = new Profile;
   
-  ProfilePanel = Backbone.View.extend({
+  ProfileUI = Backbone.View.extend({
     template  :   _.template($('#profile-template').html()),
     form      :   $('#edit-profile'),
-    events: {
+    events    : {
       'submit #edit-profile' :  'update'
     },
     initialize: function() {
@@ -117,8 +111,8 @@ $(document).ready(function() {
     render: function() {
       $('#current-store').html(this.template(Store.toJSON()));
     },
-    update: function(event) {
-      event.preventDefault();
+    update: function(e) {
+      // e.preventDefault();
       Store.set({
         email       :   $('#store-email').val(),
         name        :   $('#store-name').val(),
@@ -129,7 +123,7 @@ $(document).ready(function() {
     }
   });
   
-  ProfileView = new ProfilePanel;
+  ProfileView = new ProfileUI;
   
   ApplicationController = Backbone.Controller.extend({
     routes: { 
@@ -162,7 +156,6 @@ $(document).ready(function() {
       $('#statistics').addClass('active');
     }
   });
-  
   Controller = new ApplicationController;
   Backbone.history.start();
 });
