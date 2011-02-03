@@ -2,35 +2,46 @@ $(document).ready(function() {
 
   Product = Backbone.Model.extend({
     initialize: function() {
-      this.bind('error', this.error);
-    },
-    clear: function() {
-      this.destroy();
-      this.view.remove();
-    },
-    error: function(model, xhr) {
-      
+      this.id = this.get('_id');
     }
   });
 
   ProductList = Backbone.Collection.extend({
     model: Product,
-    url: '/products.json'
+    url: '/products.json',
+    selected: function() {
+      return this.filter(function(product) { return $(product.view.el).find(':input:checked').length });
+    },
+    remove: function() {
+      _.each(Products.selected(), function(product) { product.destroy(); });
+    }
   });
 
   Products = new ProductList;
 
   ProductView = Backbone.View.extend({
     tagName: 'tr',
+    events: {
+      'click input[type="checkbox"]' :  'toggleSelect'
+    },
     template: _.template($('#product-template').html()),
     initialize: function() {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'remove');
       this.model.bind('change', this.render);
+      this.model.bind('remove', this.remove);
       this.model.view = this;
     },
     render: function() {
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
+    },
+    toggleSelect: function() {
+      var total = Products.selected().length;
+      total ? $('#delete').text('- Delete (' + total + ')') : $('#delete').text('- Delete');
+    },
+    remove: function() {
+      $(this.el).remove();
+      this.toggleSelect();
     }
   });
 
@@ -38,8 +49,9 @@ $(document).ready(function() {
     el: $('#panel'),
     profileTemplate: _.template($('#profile-template').html()),
     events: {
-      'submit #new-product':  'createProduct',
-      'click #add-new':       'addNew'
+      'submit #new-product' :   'createProduct',
+      'click #add-new'      :   'addNew',
+      'click #delete'       :   'delete'
     },
     initialize: function() {
       _.bindAll(this, 'addOne', 'addAll', 'render');
@@ -72,14 +84,14 @@ $(document).ready(function() {
       var view = new ProductView({model: product});
       this.$("#products-list").append(view.render().el);
     },
-    showUndo: function(product) {
-      
-    },
     clearForm: function() {
       $('#new-product :input').val('');
     },
     addAll: function() {
       Products.each(this.addOne);
+    },
+    delete: function() {
+      Products.remove(Products.selected());
     }
   });
 

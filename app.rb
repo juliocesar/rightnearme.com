@@ -28,6 +28,14 @@ get '/products.json' do
   @store.products.to_json
 end
 
+delete '/products.json/:id' do
+  content_type :json
+  @store = Store.last
+  @product = @store.products.find params[:id]
+  @product.destroy
+  @product.to_json
+end
+
 post '/products.json' do  
   content_type :json
   @store = Store.last
@@ -35,15 +43,15 @@ post '/products.json' do
   attributes = JSON.parse request.body.read
   product = Product.new attributes
   @store.products << product
-  # begin
+  begin
     @store.save!
     product.to_json
-  # rescue Mongoid::Errors::Validations
-  #   puts product.errors.inspect
-  #   status 500
-  #   product.errors.add :type, 'validation'
-  #   product.errors.to_json
-  # end
+  rescue Mongoid::Errors::Validations
+    puts product.errors.inspect
+    status 500
+    product.errors.add :type, 'validation'
+    product.errors.to_json
+  end
 end
 
 get '/' do

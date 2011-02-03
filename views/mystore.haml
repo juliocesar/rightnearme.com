@@ -35,7 +35,6 @@
             %a#delete - Delete
           %li
             %input#search-products(type="text" placeholder="Search")
-        
         %form#new-product
           %input(type="text" id="product-name" placeholder="New product name")
           %textarea(id="product-description" placeholder="Description")
@@ -61,7 +60,7 @@
     / %script(src="/js/backbone-localstorage.js")    
     %script(src="/js/mystore.js")
     %script(type="text/template" id="product-template")
-      <td class="name"><a><%= name %></a></td><td class="price"><%= price %></td>
+      <td class="checkbox"><input type="checkbox" /></td><td class="name"><a><%= name %></a></td><td class="price"><%= price %></td>
     %script(type="text/template" id="profile-template")
       <h1><%= name %></h1>
       <p>At <%= location %></p>
