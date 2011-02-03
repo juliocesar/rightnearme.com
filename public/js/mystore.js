@@ -11,7 +11,7 @@ $(document).ready(function() {
     model: Product,
     url: '/products.json',
     selected: function() {
-      return this.filter(function(product) { return $(product.view.el).find(':input:checked').length });
+      return this.filter(function(product) { return $(product.view.el).find(':input:checked').length; });
     },
     remove: function() {
       _.each(Products.selected(), function(product) { product.destroy(); });
@@ -33,7 +33,6 @@ $(document).ready(function() {
       this.model.view = this;
     },
     render: function() {
-      console.log(this.model.toJSON());
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
     },
@@ -47,13 +46,11 @@ $(document).ready(function() {
     }
   });
 
-  Application = Backbone.View.extend({
-    el: $('#panel'),
-    profileTemplate: _.template($('#profile-template').html()),
+  ProductPanel = Backbone.View.extend({
     events: {
       'submit #new-product' :   'createProduct',
       'click #add-new'      :   'addNew',
-      'click #delete'       :   'delete'
+      'click #delete'       :   'remove'
     },
     initialize: function() {
       _.bindAll(this, 'addOne', 'addAll', 'render');
@@ -92,21 +89,56 @@ $(document).ready(function() {
     addAll: function() {
       Products.each(this.addOne);
     },
-    delete: function() {
+    remove: function() {
       Products.remove(Products.selected());
     }
   });
 
-  Admin = new Application;
+  ProductsApp = new ProductPanel;
   
-  AdminController = Backbone.Controller.extend({
+  Profile = Backbone.Model.extend({
+    clear :   $.noop,
+    url   :   '/profile.json'
+  });
+  
+  Store = new Profile;
+  
+  ProfilePanel = Backbone.View.extend({
+    template  :   _.template($('#profile-template').html()),
+    form      :   $('#edit-profile'),
+    events: {
+      'submit #edit-profile' :  'update'
+    },
+    initialize: function() {
+      var attributes = $('#profile-template').data('current-store');
+      Store.set(attributes);
+      this.render();
+    },
+    render: function() {
+      $('#current-store').html(this.template(Store.toJSON()));
+    },
+    update: function(event) {
+      event.preventDefault();
+      Store.set({
+        email       :   $('#store-email').val(),
+        name        :   $('#store-name').val(),
+        description :   $('#store-description').val(),
+        location    :   $('#store-location').val()
+      });
+      Store.save();
+    }
+  });
+  
+  ProfileView = new ProfilePanel;
+  
+  ApplicationController = Backbone.Controller.extend({
     routes: { 
-      '!/':           'default',
+      '!/':           'root',
       '!/profile':    'profile',
       '!/statistics': 'statistics'      
     },
     
-    default: function() {
+    root: function() {
       $('#currently').animate({left: 0}, 200);
       $('.section.active').removeClass('active');
       $('#main a.active').removeClass('active');      
@@ -128,12 +160,9 @@ $(document).ready(function() {
       $('#main a.active').removeClass('active');
       $('#go-stats').addClass('active');
       $('#statistics').addClass('active');
-    },
-    
-    
+    }
   });
   
-  Controler = new AdminController;
-  Backbone.history.start()
-  
+  Controller = new ApplicationController;
+  Backbone.history.start();
 });

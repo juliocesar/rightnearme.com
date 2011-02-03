@@ -13,9 +13,7 @@
     %title Right Near Me
   %body
     %section#panel
-      %header
-        %h1= @store.name
-        %p= @store.location
+      %header#current-store
       %nav#main
         %ul
           %li#currently
@@ -42,7 +40,7 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form#edit-profile
+        %form#edit-profile(action="/profile.json" method="post")
           %label(for="store-email") Email
           %input#store-email(type="email" value="#{@store.email}")
           %label(for="store-name") Name
@@ -51,7 +49,7 @@
           %textarea#store-description= @store.description
           %label(for="store-location") Location
           %input#store-location(type="text" value="#{@store.location}")
-          %button(type="submit" disabled="disabled") Save Changes
+          %button(type="submit") Save Changes
       #statistics.section
         %p stats
     %script(src="/js/jquery-1.4.4.min.js")
@@ -61,7 +59,6 @@
     %script(src="/js/mystore.js")
     %script(type="text/template" id="product-template")
       <td class="checkbox"><input type="checkbox" /></td><td class="name"><a><%= name %></a></td><td class="price"><%= price %></td>
-    %script(type="text/template" id="profile-template")
+    %script(type="text/template" id="profile-template" data-current-store="#{@store.to_json(:methods => [:id])}")
       <h1><%= name %></h1>
-      <p>At <%= location %></p>
-      <p><a>Edit profile</a></p>
+      <p><%= location %></p>

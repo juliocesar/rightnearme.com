@@ -139,9 +139,9 @@ div.section.active { display: block }
 
 /* products list */
 #products-list    { width: 100%; margin-top: 1em }
-#products-list td { padding: 0.5em; font-weight: bold; font-size: 1.2em }
+#products-list td { padding: 0.5em; font-weight: bold; font-size: 1.2em; font-weight: normal }
 #products-list td.name  { width: 70% }
-#products-list td.price { width: 30%; text-align: right; font-weight: normal }
+#products-list td.price { width: 30%; text-align: right }
 #products-list tr:nth-child(odd) { background: #741204 }
 #products-menu li { display: inline; margin-right: 1em }
 #products-menu a  { display: inline-block; border: 0 none }

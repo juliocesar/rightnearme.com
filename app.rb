@@ -1,5 +1,10 @@
 require File.dirname(__FILE__) + '/config/boot'
 
+def parse_json_request
+  request.body.rewind
+  JSON.parse request.body.read
+end
+
 def login_required
   unless @store = Store.find(session[:store])
     flash[:error] = "Invalid login!"
@@ -52,6 +57,14 @@ post '/products.json' do
     product.errors.add :type, 'validation'
     product.errors.to_json :methods => [:id]
   end
+end
+
+post '/profile.json' do
+  content_type :json
+  @store = Store.last
+  attributes = parse_json_request
+  @store.update_attributes attributes
+  @store.to_json :methods => [:id]
 end
 
 get '/' do
