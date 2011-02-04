@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  Product = Backbone.Model.extend({
-  });
+  Product = Backbone.Model.extend();
 
   ProductsCollection = Backbone.Collection.extend({
     model: Product,
@@ -41,6 +40,7 @@ $(document).ready(function() {
   });
 
   ProductsUI = Backbone.View.extend({
+    el: $('#panel'),
     events: {
       'submit #new-product' :   'createProduct',
       'click #add-new'      :   'addNew',
@@ -98,32 +98,34 @@ $(document).ready(function() {
   Store = new Profile;
   
   ProfileUI = Backbone.View.extend({
+    el        :   $('#panel'),
     template  :   _.template($('#profile-template').html()),
     form      :   $('#edit-profile'),
     events    : {
-      'submit #edit-profile' :  'update'
+      'submit #edit-profile' :  'updateStore'
     },
     initialize: function() {
+      _.bindAll(this, 'updateStore', 'render');
+      this.model.bind('change', this.render);
       var attributes = $('#profile-template').data('current-store');
       Store.set(attributes);
-      this.render();
     },
     render: function() {
       $('#current-store').html(this.template(Store.toJSON()));
     },
-    update: function(e) {
-      // e.preventDefault();
+    updateStore: function(e) {
+      e.preventDefault();
       Store.set({
-        email       :   $('#store-email').val(),
-        name        :   $('#store-name').val(),
-        description :   $('#store-description').val(),
-        location    :   $('#store-location').val()
+        email       :   this.form.find('#store-email').val(),
+        name        :   this.form.find('#store-name').val(),
+        description :   this.form.find('#store-description').val(),
+        location    :   this.form.find('#store-location').val()
       });
       Store.save();
     }
   });
   
-  ProfileView = new ProfileUI;
+  ProfileView = new ProfileUI({model: Store});
   
   ApplicationController = Backbone.Controller.extend({
     routes: { 

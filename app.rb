@@ -59,7 +59,7 @@ post '/products.json' do
   end
 end
 
-post '/profile.json' do
+put '/profile.json' do
   content_type :json
   @store = Store.last
   attributes = parse_json_request
