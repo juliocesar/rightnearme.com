@@ -55,10 +55,19 @@
     %script(src="/js/jquery-1.4.4.min.js")
     %script(src="/js/underscore-min.js")    
     %script(src="/js/backbone.js")
-    / %script(src="/js/backbone-localstorage.js")    
     %script(src="/js/mystore.js")
     %script(type="text/template" id="product-template")
-      <td class="checkbox"><input type="checkbox" /></td><td class="name"><a><%= name %></a></td><td class="price"><%= price %></td>
+      <td class="checkbox"><input type="checkbox" /></td>
+      <td class="name">
+      <a><%= name %></a>
+      <p><%= description %></p>
+      <form action="/products.json/<%= id %>" method="post">
+      <input type="text" value="<%= name %>" class="name" />
+      <textarea class="description"><%= description %></textarea>
+      <input type="text" value="<%= price %>" class="price" />
+      <button type="submit">Save</button>
+      </form>
+      </td><td class="price"><%= price %></td>
     %script(type="text/template" id="profile-template" data-current-store="#{@store.to_json(:methods => [:id])}")
       <h1><%= name %></h1>
       <p><%= location %></p>

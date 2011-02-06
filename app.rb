@@ -52,11 +52,26 @@ post '/products.json' do
     @store.save!
     product.to_json :methods => [:id]
   rescue Mongoid::Errors::Validations
-    puts product.errors.inspect
     status 500
     product.errors.add :type, 'validation'
     product.errors.to_json :methods => [:id]
   end
+end
+
+put '/products.json/:id' do
+  content_type :json
+  @store = Store.last
+  @product = @store.products.find params[:id]
+  attributes = JSON.parse request.body.read
+  @product.update_attributes attributes
+  begin
+    @product.save!
+    @product.to_json :methods => [:id]
+  rescue Mongoid::Errors::Validations
+    status 500
+    @product.errors.add :type, 'validation'
+    @product.errors.to_json :methods => [:id]
+  end  
 end
 
 put '/profile.json' do

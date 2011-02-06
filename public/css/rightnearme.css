@@ -145,7 +145,12 @@ div.section.active { display: block }
 #products-list tr:nth-child(odd) { background: #741204 }
 #products-menu li { display: inline; margin-right: 1em }
 #products-menu a  { display: inline-block; border: 0 none }
-
+#products-list td.name form     { display: none }
+#products-list td.name form > * { display: block; font-size: 0.8em }
+#products-list td.name input.name,
+#products-list td.name textarea     { width: 20em }
+#products-list td.name input.price  { width: 4em }
+#products-list td.name p { font-size: 75%; margin-top: 0.2em }
 
 /* profile form */
 #edit-profile > *   { display: block }

@@ -7,7 +7,7 @@ $(document).ready(function() {
     selected: function() {
       return this.filter(function(product) { return $(product.view.el).find(':input:checked').length; });
     },
-    remove: function() {
+    removeSelected: function() {
       _.each(Products.selected(), function(product) { product.destroy(); });
     }
   });
@@ -15,13 +15,16 @@ $(document).ready(function() {
 
   ProductView = Backbone.View.extend({
     tagName: 'tr',
+    editing: false,
     events: {
-      'click input[type="checkbox"]' :  'toggleSelect'
+      'click input[type="checkbox"]'  :   'toggleSelect',
+      'click a'                       :   'toggleEdit',
+      'submit form'                   :   'updateProduct'
     },
     template: _.template($('#product-template').html()),
     initialize: function() {
-      _.bindAll(this, 'render', 'remove');
-      this.model.bind('change', this.render);
+      _.bindAll(this, 'render', 'remove', 'toggleEdit', 'doneEditing');
+      this.model.bind('change', this.doneEditing);
       this.model.bind('remove', this.remove);
       this.model.view = this;
     },
@@ -33,9 +36,47 @@ $(document).ready(function() {
       var total = Products.selected().length;
       total ? $('#delete').text('- Delete (' + total + ')') : $('#delete').text('- Delete');
     },
+    toggleEdit: function(event) {
+      var form = $(event.target).next('form');
+      if (form.is(':visible')) {
+        form.fadeOut(100);
+        this.editing = false;
+      } else {
+        form.fadeIn();
+        this.editing = true;
+      }
+    },
     remove: function() {
       $(this.el).remove();
       this.toggleSelect();
+    },
+    updateProduct: function(event) {
+      event.preventDefault();
+      var form = $(this.el).find('form'), ui = this;
+      this.model.save(
+        {
+          name        : form.find('input.name').val(),
+          description : form.find('textarea').val(),
+          price       : form.find('input.price').val()
+        },
+        {
+          success: function() { ui.model.trigger('change'); },
+          error:   ui.handleError
+        }
+      );
+      this.model.trigger('change');
+    },
+    doneEditing: function() {
+      var ui = this;
+      $(this.el).find('form').fadeOut(function() { ui.render(); });
+    },
+    handleError: function(model, response) {
+      var error = JSON.parse(response.responseText), ui = model.view;
+      switch(error.type) {
+        case 'validation':
+          $(ui.el).find('form input.price').addClass('error');
+          break;
+      }
     }
   });
 
@@ -84,7 +125,7 @@ $(document).ready(function() {
       Products.each(this.addOne);
     },
     remove: function() {
-      Products.remove(Products.selected());
+      Products.removeSelected(Products.selected());
     }
   });
 
@@ -115,13 +156,12 @@ $(document).ready(function() {
     },
     updateStore: function(e) {
       e.preventDefault();
-      Store.set({
+      Store.save({
         email       :   this.form.find('#store-email').val(),
         name        :   this.form.find('#store-name').val(),
         description :   this.form.find('#store-description').val(),
         location    :   this.form.find('#store-location').val()
       });
-      Store.save();
     }
   });
   
