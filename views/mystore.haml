@@ -62,9 +62,15 @@
       <a><%= name %></a>
       <p><%= description %></p>
       <form action="/products.json/<%= id %>" method="post">
+      <div>
       <input type="text" value="<%= name %>" class="name" />
+      </div>
+      <div>
       <textarea class="description"><%= description %></textarea>
+      </div>
+      <div>
       <input type="text" value="<%= price %>" class="price" />
+      </div>
       <button type="submit">Save</button>
       </form>
       </td><td class="price"><%= price %></td>

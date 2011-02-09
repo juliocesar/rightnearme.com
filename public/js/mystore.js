@@ -60,11 +60,10 @@ $(document).ready(function() {
           price       : form.find('input.price').val()
         },
         {
+          success: ui.doneEditing,
           error:   ui.handleError
         }
       );
-      window.mod = this.model;
-      // if (!this.model.changedAttributes()) return this.doneEditing();
     },
     doneEditing: function() {
       var ui = this;
@@ -75,11 +74,12 @@ $(document).ready(function() {
       switch(error.type) {
         case 'validation':
           var form = $(ui.el).find('form');
-          var ul = form.prepend('<ul class="errors"></ul>').find('ul.errors');
-          ul.prepend('<li class="legend">Problems updating this product:</li>');
           for (var property in error) {
             if (property == 'type') continue;
-            ul.append('<li class="field">' + property + ' ' + error[property] + '</li>');
+            var field = form.find('.' + property);
+            field.siblings('span.error').remove();
+            field.after('<span class="error invisible">← ' + error[property] + '</span>');
+            field.siblings('span').animate({opacity: 'toggle', marginLeft: '0.5em'});
           }
       }
     }

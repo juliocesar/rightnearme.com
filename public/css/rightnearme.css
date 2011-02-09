@@ -32,10 +32,10 @@ button {  width: auto; overflow: visible }
 input[type="radio"] { vertical-align: text-bottom }
 input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline }
 .ie6 input { vertical-align: text-bottom }
-/* End reset */
-
 .clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden }
 .clearfix { display: block }
+/* End reset */
+
 
 html      { height: 100%; background: url(/img/background.png) repeat }
 body      { color: #FFFFFF; text-shadow: 1px 1px 2px #590C00 }
@@ -146,10 +146,18 @@ div.section.active { display: block }
 #products-menu li { display: inline; margin-right: 1em }
 #products-menu a  { display: inline-block; border: 0 none }
 #products-list td.name form     { display: none }
-#products-list td.name form > * { display: block; font-size: 0.8em }
+#products-list td.name form > * { font-size: 0.8em }
+#products-list td.name form div > * { margin: 0.2em 0 }
 #products-list td.name input.name,
 #products-list td.name textarea     { width: 20em }
 #products-list td.name input.price  { width: 4em }
+#products-list td.name span.error   { 
+  display: none;
+  margin-left: -0.5em; 
+  padding: 0.2em; 
+  background: #F83519; 
+  color: #FFF
+}
 #products-list td.name p { font-size: 75%; margin-top: 0.2em }
 
 /* profile form */
