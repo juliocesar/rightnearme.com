@@ -161,7 +161,8 @@ div.section.active { display: block }
 #products-list td.name p { font-size: 75%; margin-top: 0.2em }
 
 /* profile form */
-#edit-profile > *   { display: block }
+#edit-profile fieldset { float: left }
+#edit-profile .deets > *   { display: block }
 #edit-profile input,
 #edit-profile textarea,
 #edit-profile label { font-size: 1.2em }
