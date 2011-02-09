@@ -24,7 +24,7 @@ $(document).ready(function() {
     template: _.template($('#product-template').html()),
     initialize: function() {
       _.bindAll(this, 'render', 'remove', 'toggleEdit', 'doneEditing');
-      this.model.bind('change', this.doneEditing);
+      // this.model.bind('change', this.doneEditing);
       this.model.bind('remove', this.remove);
       this.model.view = this;
     },
@@ -37,7 +37,7 @@ $(document).ready(function() {
       total ? $('#delete').text('- Delete (' + total + ')') : $('#delete').text('- Delete');
     },
     toggleEdit: function(event) {
-      var form = $(event.target).next('form');
+      var form = $(event.target).siblings('form');
       if (form.is(':visible')) {
         form.fadeOut(100);
         this.editing = false;
@@ -60,11 +60,11 @@ $(document).ready(function() {
           price       : form.find('input.price').val()
         },
         {
-          success: function() { ui.model.trigger('change'); },
           error:   ui.handleError
         }
       );
-      this.model.trigger('change');
+      window.mod = this.model;
+      // if (!this.model.changedAttributes()) return this.doneEditing();
     },
     doneEditing: function() {
       var ui = this;
@@ -74,8 +74,13 @@ $(document).ready(function() {
       var error = JSON.parse(response.responseText), ui = model.view;
       switch(error.type) {
         case 'validation':
-          $(ui.el).find('form input.price').addClass('error');
-          break;
+          var form = $(ui.el).find('form');
+          var ul = form.prepend('<ul class="errors"></ul>').find('ul.errors');
+          ul.prepend('<li class="legend">Problems updating this product:</li>');
+          for (var property in error) {
+            if (property == 'type') continue;
+            ul.append('<li class="field">' + property + ' ' + error[property] + '</li>');
+          }
       }
     }
   });

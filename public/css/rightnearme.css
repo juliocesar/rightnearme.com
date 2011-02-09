@@ -162,3 +162,9 @@ div.section.active { display: block }
 #store-description,
 #store-location     { width: 20em }
 #edit-profile button { margin-top: 1em }
+
+/* generic forms */
+form ul.errors            { margin: 0.5em 0; padding: 0.5em; background: #F83519; color: #FFF }
+form ul.errors .legend    { font-size: 1.2em }
+form ul.errors .field     { padding-left: 0.5em; list-style-type: disc }
+
