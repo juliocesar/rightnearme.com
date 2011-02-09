@@ -40,18 +40,19 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form#edit-profile(action="/profile.json" method="post")
-          %fieldset.deets
-            %label(for="store-email") Email
-            %input#store-email(type="email" value="#{@store.email}")
-            %label(for="store-name") Name
-            %input#store-name(type="text" value="#{@store.name}")
-            %label(for="store-description") Description
-            %textarea#store-description= @store.description
-            %label(for="store-location") Location
-            %input#store-location(type="text" value="#{@store.location}")
-            %button(type="submit") Save Changes
-          %fieldset.logo
+        %form#edit-profile(action="/profile.json" method="post" enctype="multipart/form-data")
+          %label(for="store-email") Email
+          %input#store-email(type="email" value="#{@store.email}")
+          %label(for="store-name") Name
+          %input#store-name(type="text" value="#{@store.name}")
+          %label(for="store-description") Description
+          %textarea#store-description= @store.description
+          %label(for="store-location") Location
+          %input#store-location(type="text" value="#{@store.location}")
+          %button(type="submit") Save Changes
+          #upload-logo
+            %div#image-emu
+            %button Upload Image
             %input#store-logo(type="file")
           .clearfix
       #statistics.section

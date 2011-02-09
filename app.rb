@@ -21,6 +21,10 @@ configure do
   enable :sessions
 end
 
+get '/mystore' do
+  redirect '/mystore/'
+end
+
 get '/mystore/' do
   @store = Store.last
   # login_required
