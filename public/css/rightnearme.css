@@ -87,6 +87,8 @@ a.sign-up, button {
 #new-account #description   { height: 5em }
 #new-account #location      { width: 25em }
 
+#bucket { display: none }
+
 #panel { 
   width: 760px; 
   margin: 0 auto; 
@@ -172,7 +174,8 @@ div.section.active { display: block }
 #store-location     { width: 20em }
 #edit-profile button { margin-top: 1em }
 #upload-logo          { position: absolute; width: 230px; height: 250px; top: 15%; right: 2em; border: 4px dashed #f5ca01; text-align: center; z-index: 0 } 
-#store-logo           { position: absolute; top: 0; left: 0; z-index: 2 }
+#upload-logo button   { font-size: 1em }
+#store-logo           { position: absolute; top: 0; left: 0; z-index: 2; opacity: 0; cursor: pointer }
 
 #logo #image-emu { width: 100px; height: 200px; border: 3px #f5ca01 dashed }
 

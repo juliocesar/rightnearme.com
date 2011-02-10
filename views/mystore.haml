@@ -12,6 +12,7 @@
     %script(src="/js/modernizr-1.6.min.js")
     %title Right Near Me
   %body
+    %iframe#bucket(src="about:blank" name="bucket")
     %section#panel
       %header#current-store
       %nav#main
@@ -23,7 +24,7 @@
           %li
             %a#go-profile(href="#!/profile") Profile
           %li
-            %a#go-stats(href="#!/statistics") Statistics
+            %a#go-settings(href="#!/settings") Settings
       .clearfix
       #products.section.active
         %ul#products-menu
@@ -40,7 +41,7 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form#edit-profile(action="/profile.json" method="post" enctype="multipart/form-data")
+        %form#edit-profile(action="/profile.json" method="post" enctype="multipart/form-data" target="bucket")
           %label(for="store-email") Email
           %input#store-email(type="email" value="#{@store.email}")
           %label(for="store-name") Name
@@ -52,11 +53,11 @@
           %button(type="submit") Save Changes
           #upload-logo
             %div#image-emu
-            %button Upload Image
+            %button(type="button") Upload Image
             %input#store-logo(type="file")
           .clearfix
-      #statistics.section
-        %p stats
+      #settings.section
+        %p Settings
     %script(src="/js/jquery-1.4.4.min.js")
     %script(src="/js/underscore-min.js")    
     %script(src="/js/backbone.js")

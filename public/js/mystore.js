@@ -135,20 +135,20 @@ $(document).ready(function() {
   });
 
   ProductsView = new ProductsUI;
-  
+
   Profile = Backbone.Model.extend({
     clear :   $.noop,
     url   :   '/profile.json'
   });
-  
+
   Store = new Profile;
-  
+
   ProfileUI = Backbone.View.extend({
     el        :   $('#panel'),
     template  :   _.template($('#profile-template').html()),
     form      :   $('#edit-profile'),
     events    : {
-      'submit #edit-profile' :  'updateStore'
+      'submit #edit-profile' :      'updateStore'
     },
     initialize: function() {
       _.bindAll(this, 'updateStore', 'render');
@@ -169,24 +169,24 @@ $(document).ready(function() {
       });
     }
   });
-  
+
   ProfileView = new ProfileUI({model: Store});
-  
+
   ApplicationController = Backbone.Controller.extend({
-    routes: { 
+    routes: {
       '!/':           'root',
       '!/profile':    'profile',
-      '!/statistics': 'statistics'      
+      '!/settings':   'settings'
     },
-    
+
     root: function() {
       $('#currently').animate({left: 0}, 200);
       $('.section.active').removeClass('active');
-      $('#main a.active').removeClass('active');      
+      $('#main a.active').removeClass('active');
       $('#go-products').addClass('active');
       $('#products').addClass('active');
     },
-    
+
     profile: function() {
       $('#currently').animate({left: $('#main a').outerWidth() * 1}, 200);
       $('.section.active').removeClass('active');
@@ -195,12 +195,12 @@ $(document).ready(function() {
       $('#profile').addClass('active');
     },
 
-    statistics: function() {
+    settings: function() {
       $('#currently').animate({left: $('#main a').outerWidth() * 2}, 200);
       $('.section.active').removeClass('active');
       $('#main a.active').removeClass('active');
-      $('#go-stats').addClass('active');
-      $('#statistics').addClass('active');
+      $('#go-settings').addClass('active');
+      $('#settings').addClass('active');
     }
   });
   Controller = new ApplicationController;

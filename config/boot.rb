@@ -5,9 +5,10 @@ require 'bundler/setup'
 require 'sinatra'
 require 'mongoid'
 require 'yaml'
+require 'carrierwave'
+require 'carrierwave/orm/mongoid'
 
-require File.dirname(__FILE__) + '/../lib/store'
-require File.dirname(__FILE__) + '/../lib/product'
+%w(icon_uploader store product).each { |lib| require File.dirname(__FILE__) + "/../lib/#{lib}"}
 
 set :root, File.expand_path(File.dirname(__FILE__) + '/..')
 set :public => Sinatra::Application.root + '/public',
