@@ -147,9 +147,6 @@ $(document).ready(function() {
     el        :   $('#panel'),
     template  :   _.template($('#profile-template').html()),
     form      :   $('#edit-profile'),
-    events    : {
-      'submit #edit-profile' :      'updateStore'
-    },
     initialize: function() {
       _.bindAll(this, 'updateStore', 'render');
       this.model.bind('change', this.render);

@@ -41,7 +41,7 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form#edit-profile(action="/profile.json" method="post" enctype="multipart/form-data" target="bucket")
+        %form#edit-profile(action="/profile.js" method="post" enctype="multipart/form-data")
           %label(for="store-email") Email
           %input#store-email(type="email" value="#{@store.email}")
           %label(for="store-name") Name
@@ -54,7 +54,7 @@
           #upload-logo
             %div#image-emu
             %button(type="button") Upload Image
-            %input#store-logo(type="file")
+            %input#store-logo(type="file" name="logo")
           .clearfix
       #settings.section
         %p Settings

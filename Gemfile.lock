@@ -57,7 +57,7 @@ GEM
     monkey-lib (0.5.4)
       backports
     nokogiri (1.4.4)
-    rack (1.2.1)
+    rack (1.1.1.pre)
     rack-flash (0.1.1)
       rack
     rack-test (0.5.7)

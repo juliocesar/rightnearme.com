@@ -42,7 +42,7 @@ delete '/products.json/:id' do
   @store = Store.last
   @product = @store.products.find params[:id]
   @product.destroy
-  @product.to_json :methods => [:id]
+  @product.to_json methods: [:id]
 end
 
 post '/products.json' do  
@@ -58,7 +58,7 @@ post '/products.json' do
   rescue Mongoid::Errors::Validations
     status 500
     product.errors.add :type, 'validation'
-    product.errors.to_json :methods => [:id]
+    product.errors.to_json methods: [:id]
   end
 end
 
@@ -70,20 +70,19 @@ put '/products.json/:id' do
   @product.update_attributes attributes
   begin
     @product.save!
-    @product.to_json :methods => [:id]
+    @product.to_json methods: [:id]
   rescue Mongoid::Errors::Validations
     status 500
     @product.errors.add :type, 'validation'
-    @product.errors.to_json :methods => [:id]
+    @product.errors.to_json methods: [:id]
   end  
 end
 
-put '/profile.json' do
-  content_type :json
+post '/profile.js' do
   @store = Store.last
-  attributes = parse_json_request
+  # attributes = parse_json_request
   @store.update_attributes attributes
-  @store.to_json :methods => [:id]
+  @store.to_json methods: [:id]
 end
 
 get '/' do
