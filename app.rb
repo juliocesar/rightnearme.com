@@ -78,11 +78,13 @@ put '/products.json/:id' do
   end  
 end
 
-post '/profile.js' do
+put '/profile.js' do
   @store = Store.last
+  puts "GOT: #{params.inspect}"
   # attributes = parse_json_request
-  @store.update_attributes attributes
+  @store.update_attributes params
   @store.to_json methods: [:id]
+  mustache :profile, :layout => false
 end
 
 get '/' do

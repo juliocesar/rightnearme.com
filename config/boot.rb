@@ -7,6 +7,9 @@ require 'mongoid'
 require 'yaml'
 require 'carrierwave'
 require 'carrierwave/orm/mongoid'
+require 'mustache/sinatra'
+
+include Mustache::Sinatra
 
 %w(icon_uploader store product).each { |lib| require File.dirname(__FILE__) + "/../lib/#{lib}"}
 

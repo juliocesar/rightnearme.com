@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <script>
+      var _location = document.location;
+      with(window.parent) {
+        setTimeout(function() {
+          alert('cool story bra');
+          _location.replace('about:blank');
+        }, 10);
+      }
+    </script>
+  </body>
+</html>

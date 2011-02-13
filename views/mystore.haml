@@ -41,7 +41,7 @@
           %button(type="submit") Add new
         %table#products-list(cellspacing="0" cellpadding="0")
       #profile.section
-        %form#edit-profile(action="/profile.js" method="post" enctype="multipart/form-data")
+        %form#edit-profile(action="/profile.js" method="post" enctype="multipart/form-data" target="bucket")
           %label(for="store-email") Email
           %input#store-email(type="email" value="#{@store.email}")
           %label(for="store-name") Name
@@ -50,11 +50,12 @@
           %textarea#store-description= @store.description
           %label(for="store-location") Location
           %input#store-location(type="text" value="#{@store.location}")
+          %input(type="hidden" name="_method" value="put")
           %button(type="submit") Save Changes
-          #upload-logo
+          #upload-icon
             %div#image-emu
             %button(type="button") Upload Image
-            %input#store-logo(type="file" name="logo")
+            %input#store-icon(type="file" name="icon")
           .clearfix
       #settings.section
         %p Settings

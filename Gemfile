@@ -8,6 +8,7 @@ gem 'haml',         '3.0.25'
 gem 'rack-flash',   '0.1.1'
 gem 'carrierwave',  '0.5.1'
 gem 'mini_magick',  '3.2'
+gem 'mustache',     '0.12.0'
 
 group :development do
   gem 'sinatra-reloader', '0.5.0'
