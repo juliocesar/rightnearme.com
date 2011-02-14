@@ -156,14 +156,9 @@ $(document).ready(function() {
     render: function() {
       $('#current-store').html(this.template(Store.toJSON()));
     },
-    updateStore: function(e) {
-      e.preventDefault();
-      Store.save({
-        email       :   this.form.find('#store-email').val(),
-        name        :   this.form.find('#store-name').val(),
-        description :   this.form.find('#store-description').val(),
-        location    :   this.form.find('#store-location').val()
-      });
+    renderWith: function(attributes) {
+      window.those = attributes;
+      $('#current-store').html(this.template(attributes));
     }
   });
 

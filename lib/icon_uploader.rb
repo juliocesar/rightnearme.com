@@ -2,7 +2,7 @@ class IconUploader < CarrierWave::Uploader::Base
   storage :file
   
   def store_dir
-    Sinatra::Application.public + '/logos'
+    'logos/'
   end
   
   def extension_white_list

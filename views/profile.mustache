@@ -4,7 +4,7 @@
       var _location = document.location;
       with(window.parent) {
         setTimeout(function() {
-          alert('cool story bra');
+          ProfileView.renderWith({{{json}}});
           _location.replace('about:blank');
         }, 10);
       }
