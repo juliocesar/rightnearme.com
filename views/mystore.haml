@@ -81,6 +81,7 @@
       <button type="submit">Save</button>
       </form>
       </td><td class="price"><%= price %></td>
-    %script(type="text/template" id="profile-template" data-current-store="#{@store.to_json(:methods => [:id])}")
+    %script(type="text/template" id="profile-template" data-current-store="#{@store.to_json_with_defaults}")
+      <img src="<%= icon_url %>" />
       <h1><%= name %></h1>
       <p><%= location %></p>

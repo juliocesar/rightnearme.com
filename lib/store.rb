@@ -12,7 +12,7 @@ class Store
   validates_presence_of :email, :name, :description, :location
   
   def to_json_with_defaults
-    to_json :methods => [:icon_url]
+    to_json :methods => [:icon_url, :id]
   end
   
   def safe_update attrs = {}
