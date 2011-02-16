@@ -37,7 +37,7 @@ input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline }
 /* End reset */
 
 
-html      { height: 100%; background: url(/img/background.png) repeat }
+html      { height: 100%; background: url(/img/background.png) repeat; overflow-y: scroll }
 body      { color: #FFFFFF; text-shadow: 1px 1px 2px #590C00 }
 h1, h2    { font-weight: 600; font-family: 'urbana-1' }
 strong    { font-weight: 600 }
@@ -131,6 +131,10 @@ nav#main li { float: left; width: 7em; overflow: visible }
 
 div.section { display: none; padding: 1em !important; background: rgba(0, 0, 0, 0.2) }
 div.section.active { display: block }
+
+/* header */
+#current-store      { margin-bottom: 1em }
+#current-store img  { float: left; width: 100px; margin-right: 1em }
 
 /* new product form */
 #new-product          { display: none }

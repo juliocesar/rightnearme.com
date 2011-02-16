@@ -79,11 +79,9 @@ put '/products.json/:id' do
 end
 
 put '/profile.js' do
-  puts "PARMAS: #{params.inspect}"
   @store = Store.last
   @store.safe_update params
   @json = @store.to_json_with_defaults
-  puts "GOT: #{@store.inspect}"
   mustache :profile, { :layout => false }, { :json => @json }
 end
 
