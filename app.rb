@@ -85,6 +85,14 @@ put '/profile.js' do
   mustache :profile, { :layout => false }, { :json => @json }
 end
 
+post '/settings.json' do
+  attributes = parse_json_request
+  content_type :json
+  @store = Store.last
+  @store.update_settings attributes
+  @store.settings.to_json
+end
+
 get '/' do
   haml :home, layout: :welcome
 end

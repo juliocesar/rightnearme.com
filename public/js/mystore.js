@@ -24,7 +24,6 @@ $(document).ready(function() {
     template: _.template($('#product-template').html()),
     initialize: function() {
       _.bindAll(this, 'render', 'remove', 'toggleEdit', 'doneEditing');
-      // this.model.bind('change', this.doneEditing);
       this.model.bind('remove', this.remove);
       this.model.view = this;
     },
@@ -135,14 +134,37 @@ $(document).ready(function() {
   });
 
   ProductsView = new ProductsUI;
+  
+  Settings = Backbone.Model.extend({
+    url : '/settings.json'
+  });
+  
+  
+  SettingsUI = Backbone.View.extend({
+    el      : $('#settings'),
+    events  : {
+      'change #settings-visible' : 'updateVisible'
+    },
+    initialize    : function() {
+      _.bindAll(this, 'updateVisible');
+    },    
+    updateVisible : function() {
+      this.model.save({ visible: $('#settings-visible').is(':checked') ? true : false });
+    }
+  });
 
   Profile = Backbone.Model.extend({
     clear :   $.noop,
-    url   :   '/profile.json'
+    url   :   '/profile.json',
+    initialize: function() {
+      this.settings = new Settings;
+    }
   });
-
-  Store = new Profile;
-
+  Store = new Profile({ settings: new Settings });
+  
+  SettingsView = new SettingsUI({ model: Store.settings });
+  
+    
   ProfileUI = Backbone.View.extend({
     el        :   $('#panel'),
     template  :   _.template($('#profile-template').html()),

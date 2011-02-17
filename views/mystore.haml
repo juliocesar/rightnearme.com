@@ -53,12 +53,20 @@
           %input(type="hidden" name="_method" value="put")
           %button(type="submit") Save Changes
           #upload-icon
-            %div#image-emu
             %button(type="button") Upload Image
             %input#store-icon(type="file" name="icon")
           .clearfix
       #settings.section
-        %p Settings
+        %form#settings(action="/settings.json" method="post")
+          %p
+            %label(for="settings-visible") My store is visible
+            %input#settings-visible(type="checkbox" name="settings-visible")
+          %p
+            %label(for="settings-theme") Mobile view theme
+            %select#settings-visible(name="visible")
+              %option(value="red") Red
+              %option(value="black") Black
+              %option(value="white") White
     %script(src="/js/jquery-1.4.4.min.js")
     %script(src="/js/underscore-min.js")    
     %script(src="/js/backbone.js")
