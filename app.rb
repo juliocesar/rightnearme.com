@@ -27,6 +27,7 @@ end
 
 get '/mystore/' do
   @store = Store.last
+  @settings = @store.settings
   # login_required
   haml :mystore, layout: false
 end
@@ -85,7 +86,7 @@ put '/profile.js' do
   mustache :profile, { :layout => false }, { :json => @json }
 end
 
-post '/settings.json' do
+put '/settings.json' do
   attributes = parse_json_request
   content_type :json
   @store = Store.last

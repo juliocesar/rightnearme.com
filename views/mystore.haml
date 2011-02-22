@@ -60,14 +60,15 @@
         %form#settings(action="/settings.json" method="post")
           %p
             %label(for="settings-visible") My store is visible
-            %input#settings-visible(type="checkbox" name="settings-visible")
+            %input#settings-visible(type="checkbox" name="visible" checked="#{@settings[:visible].blank? ? '' : 'checked'}" value="true")
           %p
-            %label(for="settings-theme") Mobile view theme
-            %select#settings-visible(name="visible")
+            %label(for="theme") Mobile view theme
+            %select#settings-theme(name="theme")
               %option(value="red") Red
               %option(value="black") Black
               %option(value="white") White
     %script(src="/js/jquery-1.4.4.min.js")
+    %script(src="/js/jquery.ghost.js")
     %script(src="/js/underscore-min.js")    
     %script(src="/js/backbone.js")
     %script(src="/js/mystore.js")

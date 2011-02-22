@@ -136,20 +136,27 @@ $(document).ready(function() {
   ProductsView = new ProductsUI;
   
   Settings = Backbone.Model.extend({
-    url : '/settings.json'
+    url : '/settings.json',
+    isNew: function() {
+      return false; // stores will always have 1 Setting associated
+    }
   });
   
   
   SettingsUI = Backbone.View.extend({
     el      : $('#settings'),
     events  : {
-      'change #settings-visible' : 'updateVisible'
+      'change :input' : 'update'
     },
     initialize    : function() {
       _.bindAll(this, 'updateVisible');
     },    
-    updateVisible : function() {
-      this.model.save({ visible: $('#settings-visible').is(':checked') ? true : false });
+    update : function(event) {
+      var el = $(event.target), attribute = el.attr('name');
+      window.e = el;
+      params = {};
+      params[attribute] = el.val();
+      this.model.save(params);
     }
   });
 
@@ -219,4 +226,5 @@ $(document).ready(function() {
   });
   Controller = new ApplicationController;
   Backbone.history.start();
+  $(":input[placeholder]").ghost();
 });

@@ -1,5 +1,5 @@
 class Store
-  Settings = %w(visible :theme)
+  Settings = %w(visible theme)
   
   include Mongoid::Document
   field :email
