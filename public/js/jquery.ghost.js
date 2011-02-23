@@ -6,17 +6,17 @@ $.ghost = function(element, label, options) {
   
   function ghostify(element) {
     if (touched(element)) return false;
-    $(element)
+    return $(element)
       .css('color',       (options.color || '#ccc'))
-      .val(label)
+      .val(label);
   }
   
   function deghostify(element) {
     if ($(element).val() != label) return false;
-    $(element)
+    return $(element)
       .css('color', originalColor)
       .css('font-style', originalStyle)
-      .val('')
+      .val('');
   }
   
   function touched(element) {
@@ -27,6 +27,6 @@ $.ghost = function(element, label, options) {
   $(element).blur(function()   { ghostify(this); });
   $(element).parents('form').submit(function() { if (!touched(element)) deghostify(element); });
   ghostify(element);
-}
+};
 
-$.fn.ghost = function(label, options) { return this.each(function() { $.ghost(this, label, options); }); }
+$.fn.ghost = function(label, options) { return this.each(function() { $.ghost(this, label, options); }); };

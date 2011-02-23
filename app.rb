@@ -112,3 +112,7 @@ post '/accounts' do
   end
   redirect '/mystore/'
 end
+
+get '/mobile/' do
+  mustache :mobile, :layout => false
+end
