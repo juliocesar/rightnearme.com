@@ -1,21 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="/css/jquery.mobile-1.0a3.css">
-    <script src="/js/jquery-1.5.min.js"></script>
-    <script src="/js/jquery.mobile-1.0a3.js"></script>
-  </head>
-  <body>
-    <div data-role="page">
-      <div data-role="header">
-        <h1>Right Near Me mobile</h1>
-      </div>
-      <div data-role="content">
-        <p>Content</p>
-      </div>
-      <div data-role="footer">
-        <h4>Footer</h4>
-      </div>
-    </div>
-  </body>
+    <head>
+      <title>iPhone.Zepto</title>
+      <link href="/css/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="format-detection" content="telephone=no" />
+      <script src="http://use.typekit.com/ljl7gkk.js"></script>
+      <script>try{Typekit.load();}catch(e){}</script>
+    </head>
+    <body>
+      <section id="home">
+        <!-- <div class="toolbar">
+          <h1>Title</h1>
+        </div> -->
+        <h1>Right Near Me</h1>
+        <p>
+          Start by configuring <a href="#fo">your interests</a>,
+          and then we go from there.
+        </p>
+        <ul id="menu" class="menu">
+          <li class="arrow">
+            <a href="#!/stores/store">Menu 1</a>
+          </li>
+          <li>Menu 1</li>
+          <li>Menu 1</li>
+          <li>Menu 1</li>
+          <li>Menu 1</li>
+        </ul>
+      </section>
+      <section id="store">
+        <div class="toolbar">
+          <h1>Menu 1</h1>
+        </div>
+        <ul class="menu">
+          <li>SubMenu 1</li>
+          <li>SubMenu 2</li>
+        </ul>
+      </section>
+      <script src="/js/zepto.js"></script>
+      <script src="/js/underscore-min.js"></script>
+      <script src="/js/backbone.js"></script>
+      <script src="/js/mobile.js"></script>      
+    </body>
 </html>
