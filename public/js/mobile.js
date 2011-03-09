@@ -7,6 +7,7 @@ $(document).ready(function() {
   var ApplicationController = Backbone.Controller.extend({
     routes: {
       '!/'                  :   'root',
+      '!/settings'          :   'settings',
       '!/stores/:username'  :   'store'
     },
 
@@ -16,6 +17,10 @@ $(document).ready(function() {
 
     store: function(username) {
       this.navigate('#' + username);
+    },
+    
+    settings: function() {
+      this.navigate('#settings');
     },
 
     navigate: function(id) {
