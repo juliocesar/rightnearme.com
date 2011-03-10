@@ -41,7 +41,7 @@ $(document).ready(function() {
       seed.push({name: 'Evening Star Hotel', street: 'Elizabeth Street', username: 'evening'});
       for (var i = 0; i < seed.length; i++) {
         (function(result) {
-          setTimeout(function() { Home.loadResult(result); }, i * 100);
+          setTimeout(function() { Home.loadResult(result); }, i * 250);
         })(seed[i]);
       }
     },
