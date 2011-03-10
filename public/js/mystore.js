@@ -170,7 +170,6 @@ $(document).ready(function() {
   Store = new Profile({ settings: new Settings });
   
   SettingsView = new SettingsUI({ model: Store.settings });
-  
     
   ProfileUI = Backbone.View.extend({
     el        :   $('#panel'),

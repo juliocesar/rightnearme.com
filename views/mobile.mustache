@@ -1,55 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Right Near Me</title>
-      <link href="/css/mobile.css" media="screen" rel="stylesheet" type="text/css" />
-      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="format-detection" content="telephone=no" />
-      <script src="http://use.typekit.com/ljl7gkk.js"></script>
-      <script>try{Typekit.load();}catch(e){}</script>
-    </head>
-    <body>
-      <section id="home">
-        <!-- <div class="toolbar">
-          <h1>Title</h1>
-        </div> -->
-        <h1>Right Near Me</h1>
-        <div id="getting-started">
-          <p>
-            Start by telling us what are you looking for. 
-            <a href="#!/settings">Go to settings</a>
-          </p>
-        </div>
-        <ul id="menu" class="menu">
-          <li class="arrow">
-            <a href="#!/stores/store">Menu 1</a>
-          </li>
-          <li>Menu 1</li>
-          <li>Menu 1</li>
-          <li>Menu 1</li>
-          <li>Menu 1</li>
-        </ul>
-      </section>
-      <section id="store">
-        <div class="toolbar">
-          <h1>Menu 1</h1>
-        </div>
-        <ul class="menu">
-          <li>SubMenu 1</li>
-          <li>SubMenu 2</li>
-        </ul>
-      </section>
-      <section id="settings">
-        <div class="toolbar">
-          <h1>Settings</h1>
-        </div>
-        <p>Settings</p>
-        <p>Bla bla bla</p>
-      </section>
-      <script src="/js/zepto.js"></script>
-      <script src="/js/underscore-min.js"></script>
-      <script src="/js/backbone.js"></script>
-      <script src="/js/mobile.js"></script>      
-    </body>
+  <head>
+    <title>Right Near Me</title>
+    <link href="/css/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="red" />      
+    <meta name="format-detection" content="telephone=no" />
+    <script src="http://use.typekit.com/ljl7gkk.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body>
+    <section id="home">
+      <!-- <div class="toolbar">
+        <h1>Title</h1>
+      </div> -->
+      <h1>Right Near Me</h1>
+      <div id="getting-started">
+        <p>
+          Start by telling us what are you looking for. 
+          <a href="#!/settings">Go to settings</a>
+        </p>
+      </div>
+      <h2>
+        Showing 10 stores closest to you, no keywords specified.
+      </h2>
+      <ul id="results">
+        <li class="arrow">
+          <a href="#!/stores/taste">Taste Café, Foveaux Street</a>
+        </li>
+        <li class="arrow">
+          <a href="#!/stores/surf">RTA Staff Credit Union, Kippax Street</a>
+        </li>
+        <li class="arrow">
+          <a href="#!/stores/rona">Rona Leather Fashions, Foveaux Street</a>
+        </li>
+        <li class="arrow">
+          <a href="#!/stores/yoga">BodyMindLife Yoga, Foveaux Street</a>
+        </li>
+        <li class="arrow">
+          <a href="#!/stores/music">Forresters Hotel, Fitzroy Road</a>
+        </li>
+        <li class="arrow">
+          <a href="#!/stores/zante">Zante Cafe, Foveaux Street</a>
+        </li>
+        <li class="arrow">
+          <a href="#!/stores/zante">Evening Star Hotel, Elizabeth Street</a>
+        </li>        
+      </ul>
+    </section>
+    <section id="taste">
+      <div class="toolbar">
+        <h1>Menu 1</h1>
+      </div>
+      <ul class="menu">
+        <li>SubMenu 1</li>
+        <li>SubMenu 2</li>
+      </ul>
+    </section>
+    <section id="settings">
+      <div class="toolbar">
+        <h1>Settings</h1>
+      </div>
+      <form action="#">
+        <label for="keywords">Keywords</label>
+        <input type="text" name="keywords" id="keywords">
+      </form>
+      <p>Settings</p>
+      <p>Bla bla bla</p>
+    </section>
+    <script src="/js/zepto.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/backbone.js"></script>
+    <script src="/js/mobile.js"></script>      
+    <script type="text/template" id="result-template">
+      <li class="arrow">
+        <a href="#!/stores/<%= username %>"><%= name %>, <%= street %></a>
+      </li>    
+    </script>
+  </body>
 </html>
