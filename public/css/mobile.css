@@ -70,15 +70,12 @@ body.landscape .toolbar > h1 {
 #getting-started.visible { -webkit-transform: translate3d(0%, 0%, 0%); opacity: 1 }
 
 #getting-started .icon {
-  -webkit-animation-name: throbs;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: ease-in-out; 
+  -webkit-animation: throbs 0.5s infinite ease-in-out;
+  -webkit-border-radius: 1em;  
   line-height: 1em;
   font-weight: bold;
   display: inline-block;
   font-size: 2em;
-  -webkit-border-radius: 1em;
   width: 30px;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5D201), to(#f5a101));
   color: white;
