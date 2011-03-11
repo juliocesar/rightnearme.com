@@ -55,9 +55,6 @@ body.landscape .toolbar > h1 {
 }
 
 #getting-started {
-  -webkit-transition: all 0.25s ease-in-out;
-  -webkit-transform-style: preserve-3d;  
-  -webkit-transform: translate3d(-50%, 0%, 0%);
   font-size: 16px;
   position: relative;
   background: #6D1003;
@@ -68,14 +65,15 @@ body.landscape .toolbar > h1 {
   border-top-left-radius: 8px 8px;
   border-top-right-radius: 8px 8px;
   line-height: 20px;
-  opacity: 0; 
-  display: none;
 }
 
 #getting-started.visible { -webkit-transform: translate3d(0%, 0%, 0%); opacity: 1 }
 
-#getting-started:before {
-  content: '!';
+#getting-started .icon {
+  -webkit-animation-name: throbs;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out; 
   line-height: 1em;
   font-weight: bold;
   display: inline-block;
@@ -230,4 +228,10 @@ a.back {
   left: 6px;
   max-width: 55px;
   right: auto;
+}
+
+@-webkit-keyframes throbs {
+  0%    { -webkit-transform: scale(1) }
+  50%   { -webkit-transform: scale(1.1) }
+  100%  { -webkit-transform: scale(1) }
 }
