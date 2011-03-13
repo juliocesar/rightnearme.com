@@ -87,39 +87,30 @@ body.landscape .toolbar > h1 {
   text-shadow: 1px 1px 0px #000;
 }
 
-#settings {
-  -webkit-transform: translate3d(0%, -100%, 0%); opacity: 0
-}
+#settings { -webkit-transform: translate3d(0%, -100%, 0%); opacity: 0 }
 
-#results { display: none }
-
+#results    { display: none }
 #results li { 
+  -webkit-transition: opacity 0.25s ease-out;
+  -webkit-transform-style: preserve-3d;    
   display: none;
   opacity: 0;  
-  -webkit-transition: opacity 0.25s ease-out;
-  -webkit-transform-style: preserve-3d;  
 }
+#results li.visible { opacity: 1}
 
-#results li.visible {
-  opacity: 1
-}
-
-h1, h2 {
-  margin: 10px;
-  text-shadow: rgba(255, 255, 255, 0.19)
-}
+h1, h2 { margin: 10px; text-shadow: rgba(255, 255, 255, 0.19) }
 p, form { margin: 0 10px }
 h2 > a, p > a {
+  -webkit-box-shadow: 1px 1px 0px #000;  
+  -webkit-border-radius: 0.5em;
   font-style: italic;
   font-weight: 600;
   text-shadow: 1px 1px 0px #757575;
-  -webkit-box-shadow: 1px 1px 0px #000 ;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5D201), to(#f5a101));
   color: #FFF; 
   display: inline-block; 
   padding: 0.15em 0.25em; 
   text-decoration: none; 
-  -webkit-border-radius: 0.5em
 }
 h1, h2, p { text-shadow: 1px 1px 0 #000 }
 
