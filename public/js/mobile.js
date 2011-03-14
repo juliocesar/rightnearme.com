@@ -1,52 +1,74 @@
 $(document).ready(function() {
 
-  setTimeout(function() { window.scrollTo(0, 0) }, 1000);
+  setTimeout(function() { window.scrollTo(0, 0); }, 1000);
+    
+  tooltip = function(message, type) {
+    var id = 'tip-' + new Date().getTime();
+    $('body').append('<div class="tooltip floating notice" id="' + id + '">' + message + '</div');
+    $('#' + id).show();
+  }
+
+  MobileSettings = Backbone.Model.extend({
+    sync: function(method, model, options) {
+      switch(method) {
+        case 'create':
+        case 'update':
+          localStorage.setItem('Settings', JSON.stringify(model));
+          break;
+        case 'delete':
+          localStorage.removeItem('Settings');
+          break;
+        case 'read':
+          var settings = localStorage.getItem('Settings');
+          model.attributes = (settings && JSON.parse(settings) || {});
+          return model;
+      }
+      return this;
+    },
+    exists: function() {
+      return !_.isEmpty(this.fetch().attributes);
+    }
+  });
+  
+  Settings = new MobileSettings;
+  Settings.fetch();
 
   var HomeView = Backbone.View.extend({
-    el: $('#home'),
-    resultTemplate: _.template($('#result-template').html()),
+    el              : $('#home'),
+    resultTemplate  : _.template($('#result-template').html()),
     initialize: function() {
-      if (true) this.askKeywords(); // if Preferences.new
-    },
-
-    askKeywords: function() {
-      setTimeout(
-        function() {
-          $('#getting-started').css('display', 'block');
-          setTimeout(function() { $('#getting-started').addClass('visible'); }, 1);
-        },
-        2000
-      );
+      if (true) $('#getting-started').show();
     },
 
     loadResult: function(store) {
       var li = $(this.resultTemplate(store));
       li.css('display', 'block');
       $('#results').show().append(li);
-      setTimeout(function() { li.addClass('visible') }, 1);
+      setTimeout(function() { li.addClass('visible'); }, 1);
     }
   });
 
-  Home = new HomeView;
-
-  setTimeout(
-    function() {
-      var seed = [];
-      seed.push({name: 'Taste Cafe', street: 'Foveaux Street', username: 'taste'});
-      seed.push({name: 'RTA Staff Credit Union', street: 'Kippax Street', username: 'rta'});
-      seed.push({name: 'Rona Leather Fashions', street: 'Foveaux Street', username: 'rona'});
-      seed.push({name: 'BodyMindLife Yoga', street: 'Foveaux Street', username: 'yoga'});
-      seed.push({name: 'Forresters Hotel', street: 'Fitzroy Road', username: 'forresters'});
-      seed.push({name: 'Zante Cafe', street: 'Foveaux Street', username: 'zante'});
-      seed.push({name: 'Evening Star Hotel', street: 'Elizabeth Street', username: 'evening'});
-      for (var i = 0; i < seed.length; i++) {
-        (function(result) {
-          setTimeout(function() { Home.loadResult(result); }, i * 250);
-        })(seed[i]);
-      }
+  HomePage = new HomeView;
+  
+  var SettingsView = Backbone.View.extend({
+    el      :   $('#settings'),
+    events  :   {
+      'submit form': 'update'
     },
-    3000
-  );
+    
+    initialize  : function () {
+      Settings.bind('change', function() { tooltip('Settings updated!', 'notice'); });
+    },
+
+    update      : function(event) {
+      event.preventDefault();
+      var field = $(this.el).find('input');
+      Settings.save({'keywords': field.val() });
+      $('body').trigger('focus');
+    }
+  });
+  
+  SettingsPage = new SettingsView;
 
   var ApplicationController = Backbone.Controller.extend({
     routes: {
@@ -73,6 +95,7 @@ $(document).ready(function() {
       $(id).addClass('current');
       if (id !== '#home' && !section.find('a.back').length) $(".current .toolbar").prepend('<a class="back">Back</a>');
       $('.current').css('min-height', window.innerHeight);
+      window.scrollTo(0, 0);
     }
   });
 
@@ -81,21 +104,23 @@ $(document).ready(function() {
   Controller = new ApplicationController;
   Backbone.history.start();
 
-  // $("body > section").first().addClass("current");
-  // $("a.back").live('touchstart', function(event) {
-  //  var current = $(event.currentTarget).attr("href");
-  //   $(".current").removeClass("current").addClass("reverse");
-  //   $(current).addClass("current");
-  // });
-  //
-  // $(".menu a[href]").live('touchstart', function(event) {
-  //   var section = $(event.currentTarget).closest('section'),
-  //     link = $(event.currentTarget),
-  //     prev_element = "#"+(section.removeClass("current").addClass("reverse").attr("id"));
-  //   $(link.attr("href")).addClass("current");
-  //   $(".current .back").remove();
-  //   $(".current .toolbar").prepend("<a href=\""+prev_element+"\" class=\"back\">Back</a>");
-  // });
 
-
+  setTimeout(
+    function() {
+      var seed = [];
+      seed.push({name: 'Taste Cafe', street: 'Foveaux Street', username: 'taste'});
+      seed.push({name: 'RTA Staff Credit Union', street: 'Kippax Street', username: 'rta'});
+      seed.push({name: 'Rona Leather Fashions', street: 'Foveaux Street', username: 'rona'});
+      seed.push({name: 'BodyMindLife Yoga', street: 'Foveaux Street', username: 'yoga'});
+      seed.push({name: 'Forresters Hotel', street: 'Fitzroy Road', username: 'forresters'});
+      seed.push({name: 'Zante Cafe', street: 'Foveaux Street', username: 'zante'});
+      seed.push({name: 'Evening Star Hotel', street: 'Elizabeth Street', username: 'evening'});
+      for (var i = 0; i < seed.length; i++) {
+        (function(result) {
+          setTimeout(function() { HomePage.loadResult(result); }, i * 250);
+        })(seed[i]);
+      }
+    },
+    3000
+  );
 });

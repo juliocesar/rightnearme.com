@@ -1,14 +1,25 @@
 * { margin: 0px; padding: 0px }
 
+form input, 
+form textarea { 
+  -webkit-border-radius: 0;  
+  font-family: inherit;
+  border-width: 0px 1px 1px 0px;
+  border-style: solid;
+  border-color: #6D1003;
+  padding: 2px; 
+  font-size: 16px; 
+}
+label         { font-weight: bold }
+
 .toolbar {
   -webkit-box-sizing: border-box;
-  background: #6D1003;
   -webkit-box-shadow: 0px 1px 1px #000;
-/*  border-bottom: 1px solid #000;*/
+  background: #6D1003;  
   height: 45px;
   padding: 10px;
   position: relative;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 body {
@@ -27,15 +38,15 @@ body {
 }
 
 body > section {
+  -webkit-transition: all 0.25s ease-in-out;
+  -webkit-transform-style: preserve-3d;  
+  -webkit-transform: translate3d(100%,0%,0%);  
   display: block;
   left: 0px;
   min-height: 100%;
   position: absolute;
   width: 100%;
-  -webkit-transform: translate3d(100%,0%,0%);
   opacity: 0;
-  -webkit-transition: all 0.25s ease-in-out;
-  -webkit-transform-style: preserve-3d;  
   background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#a51703), to(#BC4F40)), #a51703;    
 }
 
@@ -45,31 +56,28 @@ body.landscape .toolbar > h1 {
 }
 
 .reverse { -webkit-transform: translate3d(-100%, 0%, 0%); opacity: 0 }
-.current { -webkit-transform: translate3d(0%,0%, 0%) !important; opacity: 1 !important }
+.current { -webkit-transform: translate3d(0%,0%, 0%) !important; opacity: 1 !important; min-height: 420px !important }
 
-#home h1:first-child  {
-  text-align: center;
-  display: inline-block;
-  padding: 4px 55px 0 0;
-  background: transparent url(/img/mobile.png) top right no-repeat;
-}
-
-#getting-started {
-  font-size: 16px;
+.tooltip {
+  display: none;  
   position: relative;
+  font-size: 16px;
   background: #6D1003;
   margin: 0 10px;  
-  padding: 10px 0 10px 40px;
+  padding: 10px 0 10px 40px;  
   border-bottom-left-radius: 8px 8px;
   border-bottom-right-radius: 8px 8px;
   border-top-left-radius: 8px 8px;
   border-top-right-radius: 8px 8px;
-  line-height: 20px;
+  line-height: 20px;  
 }
 
-#getting-started.visible { -webkit-transform: translate3d(0%, 0%, 0%); opacity: 1 }
+.tooltip.floating {
+  position: fixed;
+  bottom: 10px;
+}
 
-#getting-started .icon {
+.tooltip .icon {
   -webkit-animation: throbs 0.5s infinite ease-in-out;
   -webkit-border-radius: 1em;  
   line-height: 1em;
@@ -84,7 +92,16 @@ body.landscape .toolbar > h1 {
   margin-top: -0.5em;
   left: 10px;
   text-align: center;
-  text-shadow: 1px 1px 0px #000;
+  text-shadow: 1px 1px 0px #000;  
+}
+
+.tooltip p { margin: 0 10px }
+
+#home h1:first-child  {
+  text-align: center;
+  display: inline-block;
+  padding: 4px 55px 0 0;
+  background: transparent url(/img/mobile.png) top right no-repeat;
 }
 
 #settings { -webkit-transform: translate3d(0%, -100%, 0%); opacity: 0 }
@@ -96,7 +113,11 @@ body.landscape .toolbar > h1 {
   display: none;
   opacity: 0;  
 }
-#results li.visible { opacity: 1}
+#results li.visible { opacity: 1 }
+
+#settings form        { margin-bottom: 10px }
+#settings form input  { width: 260px; font-size: 20px }
+#settings label       { display: block; font-size: 24px }
 
 h1, h2 { margin: 10px; text-shadow: rgba(255, 255, 255, 0.19) }
 p, form { margin: 0 10px }
@@ -112,7 +133,9 @@ h2 > a, p > a {
   padding: 0.15em 0.25em; 
   text-decoration: none; 
 }
-h1, h2, p { text-shadow: 1px 1px 0 #000 }
+h1, h2, p     { text-shadow: 1px 1px 0 #000 }
+p:first-child { margin-top: 0 }
+p             { margin-top: 4px; margin-bottom: 8px } /* avoid overriding sides margin */
 
 .toolbar > h1 {
   color: white;
@@ -182,7 +205,6 @@ ul li a, li.img a + a {
   white-space: nowrap;
   color: #000;
 }
-
 
 .button, .back, .cancel, .add {
 /*  -webkit-border-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAeCAIAAACqmwlGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAatJREFUeNqVlMtKw0AUhqfJSRpTk5Za1FAvxS6sgrVeFrpQdOcT+IpuBVHcuVBQpCDYjeAdkSpavDTGNJkz43FpFZz8DISZ+b75J5tJbWwfMsZuby7rh/vN5v1H+539TMZxPa84v7g0WirTFISQR/t7jdOTcqVaGp+ze50uIfDbL62H3a3NqerMwtIqXF9dnF+dL6+t9/S6hmFqut4luHns80aKpcrxwY43PKK7+f6J2ZVcYTCl6ZIxKuwatEhbpmU72UKjfgCakXFz/TwW7L8QlgIbTNtBwVAgU0g644IGZoycqYVgQGRRLBQFggEpHJUFBI4iUhYIBhSSPooCwUB0zEWiBsERlRsECJSIUlEgOHmDH3TM909FgWBgqe8oCgRrLGGADlcvIDB5A2nfQ7kD6D5J/jn5lZILBoAUQgWVUgDoWi5r8zhUEXgU5nOOVp0sB+0W+f8WEDY9MabpYNUqQ29Pd1Hoi79eA1qkLQIIY5CGIOwUvYHBQr5xdvn4/BSGnS7BstIDhexUbVo3jNarD1Ky5xfftszF+WqPZcKvp5IjfoYRoYHv0/QLHvXjAb8xkEMAAAAASUVORK5CYII=) 0 5 0 5 stretch stretch;*/

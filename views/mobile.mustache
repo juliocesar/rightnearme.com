@@ -3,7 +3,7 @@
   <head>
     <title>Right Near Me</title>
     <link href="/css/mobile.css" media="screen" rel="stylesheet" type="text/css" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="red" />      
     <meta name="format-detection" content="telephone=no" />
@@ -16,7 +16,7 @@
         <h1>Title</h1>
       </div> -->
       <h1>Right Near Me</h1>
-      <div id="getting-started">
+      <div id="getting-started" class="tooltip notice">
         <span class="icon">!</span>
         <p>
           Start by telling us what are you looking for. 
@@ -65,10 +65,15 @@
       </div>
       <form action="#">
         <label for="keywords">Keywords</label>
-        <input type="text" name="keywords" id="keywords">
+        <input type="text" name="keywords" id="keywords" placeholder="Space separated" autocapitalize="off">
       </form>
-      <p>Settings</p>
-      <p>Bla bla bla</p>
+      <p>
+        Keywords will narrow down the list of stores near you based on relevance/association with
+        the keywords you specify.
+      </p>
+      <p>
+        Think of this as a search criteria that sticks around.
+      </p>
     </section>
     <script src="/js/zepto.js"></script>
     <script src="/js/underscore-min.js"></script>
