@@ -2,10 +2,24 @@ $(document).ready(function() {
 
   setTimeout(function() { window.scrollTo(0, 0); }, 1000);
     
-  tooltip = function(message, type) {
+  Tooltip = function(message, type) {
     var id = 'tip-' + new Date().getTime();
     $('body').append('<div class="tooltip floating notice" id="' + id + '">' + message + '</div');
     $('#' + id).show();
+  }
+  
+  Tip = function(options) {
+    var opts = _.extend({ 
+      id: 'tip-' + new Date().getTime(), 
+      icon: '!',
+      classes: 'notice',
+      duration: 2000
+    }, options);
+    if (!Tip.template) Tip.template = _.template($('#tooltip-template').html());
+    $('body').append(Tip.template(opts));
+    $('#' + opts.id).addClass('visible');
+    setTimeout(function() { $('#' + opts.id).removeClass('visible'); }, opts.duration);
+    setTimeout(function() { $('#' + opts.id).remove(); }, opts.duration + 250);
   }
 
   MobileSettings = Backbone.Model.extend({

@@ -73,8 +73,17 @@ body.landscape .toolbar > h1 {
 }
 
 .tooltip.floating {
+  -webkit-transform: translate3d(0, 10px, 0);
+  -webkit-transition: all 0.25s ease-out;
+  opacity: 0;
+  display: block;
   position: fixed;
   bottom: 10px;
+}
+
+.tooltip.floating.visible {
+  -webkit-transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 .tooltip .icon {
@@ -95,7 +104,8 @@ body.landscape .toolbar > h1 {
   text-shadow: 1px 1px 0px #000;  
 }
 
-.tooltip p { margin: 0 10px }
+.tooltip p        { margin: 0 10px }
+.tooltip.visible  { }
 
 #home h1:first-child  {
   text-align: center;

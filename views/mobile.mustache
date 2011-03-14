@@ -84,5 +84,13 @@
         <a href="#!/stores/<%= username %>"><%= name %>, <%= street %></a>
       </li>    
     </script>
+    <script type="text/template" id="tooltip-template">
+      <div class="tooltip floating <%= classes %>" id="<%= id %>">
+        <span class="icon"><%= icon %></span>
+        <p>
+          <%= message %>
+        </p>
+      </div>
+    </script>
   </body>
 </html>
