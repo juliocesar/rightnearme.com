@@ -1,21 +1,21 @@
 * { margin: 0px; padding: 0px }
 
-form input, 
-form textarea { 
-  -webkit-border-radius: 0;  
+form input,
+form textarea {
+  -webkit-border-radius: 0;
   font-family: inherit;
   border-width: 0px 1px 1px 0px;
   border-style: solid;
   border-color: #6D1003;
-  padding: 2px; 
-  font-size: 16px; 
+  padding: 2px;
+  font-size: 16px;
 }
 label         { font-weight: bold }
 
 .toolbar {
   -webkit-box-sizing: border-box;
   -webkit-box-shadow: 0px 1px 1px #000;
-  background: #6D1003;  
+  background: #6D1003;
   height: 45px;
   padding: 10px;
   position: relative;
@@ -28,26 +28,26 @@ body {
   -webkit-transform-style: preserve-3d;
   -webkit-user-select: none;
   color: #FFF;
-  font-family: 'urbana-1'; 
+  font-family: 'urbana-1';
   font-weight: 300;
   overflow-x: hidden;
   height: 100%;
   width: 100%;
-  background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#a51703), to(#BC4F40)), #a51703;  
+  background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#a51703), to(#BC4F40)), #a51703;
   position: absolute;
 }
 
 body > section {
   -webkit-transition: all 0.25s ease-in-out;
-  -webkit-transform-style: preserve-3d;  
-  -webkit-transform: translate3d(100%,0%,0%);  
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform: translate3d(100%,0%,0%);
   display: block;
   left: 0px;
   min-height: 100%;
   position: absolute;
   width: 100%;
   opacity: 0;
-  background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#a51703), to(#BC4F40)), #a51703;    
+  background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#a51703), to(#BC4F40)), #a51703;
 }
 
 body.landscape .toolbar > h1 {
@@ -56,20 +56,20 @@ body.landscape .toolbar > h1 {
 }
 
 .reverse { -webkit-transform: translate3d(-100%, 0%, 0%); opacity: 0 }
-.current { -webkit-transform: translate3d(0%,0%, 0%) !important; opacity: 1 !important; min-height: 420px !important }
+.current { -webkit-transform: translate3d(0%,0%, 0%) !important; opacity: 1 !important }
 
 .tooltip {
-  display: none;  
+  display: none;
   position: relative;
   font-size: 16px;
   background: #6D1003;
-  margin: 0 10px;  
-  padding: 10px 0 10px 40px;  
+  margin: 0 10px;
+  padding: 10px 0 10px 40px;
   border-bottom-left-radius: 8px 8px;
   border-bottom-right-radius: 8px 8px;
   border-top-left-radius: 8px 8px;
   border-top-right-radius: 8px 8px;
-  line-height: 20px;  
+  line-height: 20px;
 }
 
 .tooltip.floating {
@@ -77,8 +77,8 @@ body.landscape .toolbar > h1 {
   -webkit-transition: all 0.25s ease-out;
   opacity: 0;
   display: block;
-  position: fixed;
-  bottom: 10px;
+  position: absolute;
+  left: 0;
 }
 
 .tooltip.floating.visible {
@@ -87,8 +87,7 @@ body.landscape .toolbar > h1 {
 }
 
 .tooltip .icon {
-  -webkit-animation: throbs 0.5s infinite ease-in-out;
-  -webkit-border-radius: 1em;  
+  -webkit-border-radius: 1em;
   line-height: 1em;
   font-weight: bold;
   display: inline-block;
@@ -101,7 +100,10 @@ body.landscape .toolbar > h1 {
   margin-top: -0.5em;
   left: 10px;
   text-align: center;
-  text-shadow: 1px 1px 0px #000;  
+  text-shadow: 1px 1px 0px #000;
+}
+.tooltip.important .icon {
+  -webkit-animation: throbs 0.5s infinite ease-in-out;
 }
 
 .tooltip p        { margin: 0 10px }
@@ -117,11 +119,11 @@ body.landscape .toolbar > h1 {
 #settings { -webkit-transform: translate3d(0%, -100%, 0%); opacity: 0 }
 
 #results    { display: none }
-#results li { 
+#results li {
   -webkit-transition: opacity 0.25s ease-out;
-  -webkit-transform-style: preserve-3d;    
+  -webkit-transform-style: preserve-3d;
   display: none;
-  opacity: 0;  
+  opacity: 0;
 }
 #results li.visible { opacity: 1 }
 
@@ -132,16 +134,16 @@ body.landscape .toolbar > h1 {
 h1, h2 { margin: 10px; text-shadow: rgba(255, 255, 255, 0.19) }
 p, form { margin: 0 10px }
 h2 > a, p > a {
-  -webkit-box-shadow: 1px 1px 0px #000;  
+  -webkit-box-shadow: 1px 1px 0px #000;
   -webkit-border-radius: 0.5em;
   font-style: italic;
   font-weight: 600;
   text-shadow: 1px 1px 0px #757575;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5D201), to(#f5a101));
-  color: #FFF; 
-  display: inline-block; 
-  padding: 0.15em 0.25em; 
-  text-decoration: none; 
+  color: #FFF;
+  display: inline-block;
+  padding: 0.15em 0.25em;
+  text-decoration: none;
 }
 h1, h2, p     { text-shadow: 1px 1px 0 #000 }
 p:first-child { margin-top: 0 }
@@ -199,16 +201,14 @@ ul li.arrow {
   background-repeat: no-repeat;
 }
 
-body > .current {
-  display: block !important;
-}
+body > .current { display: block !important; min-height: 420px !important }
 
 body.landscape > * { min-height: 320px }
 
 ul li a, li.img a + a {
   display: block;
   margin: -10px;
-  overflow: hidden; 
+  overflow: hidden;
   padding: 12px 30px 12px 10px;
   text-decoration: none;
   text-overflow: ellipsis;

@@ -1,25 +1,21 @@
 $(document).ready(function() {
 
   setTimeout(function() { window.scrollTo(0, 0); }, 1000);
-    
-  Tooltip = function(message, type) {
-    var id = 'tip-' + new Date().getTime();
-    $('body').append('<div class="tooltip floating notice" id="' + id + '">' + message + '</div');
-    $('#' + id).show();
-  }
-  
+      
   Tip = function(options) {
-    var opts = _.extend({ 
-      id: 'tip-' + new Date().getTime(), 
-      icon: '!',
-      classes: 'notice',
-      duration: 2000
-    }, options);
+    var opts = _.extend({ id: 'tip-' + new Date().getTime(), icon: '!', classes: 'notice', duration: 2000 }, options);
     if (!Tip.template) Tip.template = _.template($('#tooltip-template').html());
-    $('body').append(Tip.template(opts));
-    $('#' + opts.id).addClass('visible');
-    setTimeout(function() { $('#' + opts.id).removeClass('visible'); }, opts.duration);
-    setTimeout(function() { $('#' + opts.id).remove(); }, opts.duration + 250);
+    var tip = $(Tip.template(opts));
+    $(window).bind('scroll', function() {
+      tip.css('top', ((document.body.scrollTop + window.innerHeight) - (tip.height() + 60)) + 'px');
+    });
+    $(window).trigger('scroll');
+    $('section.current').append(tip);
+    setTimeout(function() {
+      tip.addClass('visible');
+      setTimeout(function() { tip.removeClass('visible'); }, opts.duration);
+      setTimeout(function() { tip.remove(); }, opts.duration + 250);
+    }, 250);
   }
 
   MobileSettings = Backbone.Model.extend({
@@ -71,14 +67,15 @@ $(document).ready(function() {
     },
     
     initialize  : function () {
-      Settings.bind('change', function() { tooltip('Settings updated!', 'notice'); });
+      Settings.bind('change', function() { Tip({ message: 'Settings updated!', duration: 3000 }); });
+      
     },
 
     update      : function(event) {
       event.preventDefault();
       var field = $(this.el).find('input');
       Settings.save({'keywords': field.val() });
-      $('body').trigger('focus');
+      field.get(0).blur();
     }
   });
   
@@ -107,7 +104,7 @@ $(document).ready(function() {
       $('.current').removeClass('current').addClass('reverse');
       var section = $(id);
       $(id).addClass('current');
-      if (id !== '#home' && !section.find('a.back').length) $(".current .toolbar").prepend('<a class="back">Back</a>');
+      if (id !== '#home' && !section.find('a.back').length) $(".current .toolbar").prepend('<a class="back"">Back</a>');
       $('.current').css('min-height', window.innerHeight);
       window.scrollTo(0, 0);
     }
