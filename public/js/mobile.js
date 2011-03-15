@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  
   setTimeout(function() { window.scrollTo(0, 0); }, 1000);
       
   Tip = function(options) {
@@ -16,7 +16,7 @@ $(document).ready(function() {
       setTimeout(function() { tip.removeClass('visible'); }, opts.duration);
       setTimeout(function() { tip.remove(); }, opts.duration + 250);
     }, 250);
-  }
+  };
 
   MobileSettings = Backbone.Model.extend({
     sync: function(method, model, options) {
@@ -47,7 +47,10 @@ $(document).ready(function() {
     el              : $('#home'),
     resultTemplate  : _.template($('#result-template').html()),
     initialize: function() {
-      if (true) $('#getting-started').show();
+      if (!Settings.exists()) {
+        $('menu').hide();
+        $('#getting-started').show();
+      }
     },
 
     loadResult: function(store) {
@@ -67,8 +70,10 @@ $(document).ready(function() {
     },
     
     initialize  : function () {
-      Settings.bind('change', function() { Tip({ message: 'Settings updated!', duration: 3000 }); });
-      
+      Settings.bind('change', function() { 
+        $('#getting-started').hide();
+        Tip({ message: 'Settings updated!', duration: 3000 }); 
+      });
     },
 
     update      : function(event) {
@@ -100,13 +105,15 @@ $(document).ready(function() {
       this.navigate('#settings');
     },
 
-    navigate: function(id) {
+    navigate: function(id, callback) {
       $('.current').removeClass('current').addClass('reverse');
       var section = $(id);
-      $(id).addClass('current');
+      section.addClass('current');
       if (id !== '#home' && !section.find('a.back').length) $(".current .toolbar").prepend('<a class="back"">Back</a>');
-      $('.current').css('min-height', window.innerHeight);
-      window.scrollTo(0, 0);
+      setTimeout(function() {
+        window.scrollTo(0, 0);
+        if (_.isFunction(callback)) callback();
+      }, 250);
     }
   });
 

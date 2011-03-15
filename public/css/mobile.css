@@ -7,7 +7,7 @@ form textarea {
   border-width: 0px 1px 1px 0px;
   border-style: solid;
   border-color: #6D1003;
-  padding: 2px;
+  padding: 0.2em;
   font-size: 16px;
 }
 label         { font-weight: bold }
@@ -57,6 +57,28 @@ body.landscape .toolbar > h1 {
 
 .reverse { -webkit-transform: translate3d(-100%, 0%, 0%); opacity: 0 }
 .current { -webkit-transform: translate3d(0%,0%, 0%) !important; opacity: 1 !important }
+
+menu {
+  display: none;
+  -webkit-box-align: stretch;
+  -webkit-box-orient: horizontal;
+  display: -webkit-box;
+  margin: 0 10px;
+  padding: 10px 0 10px 40px;
+  border-bottom-left-radius: 8px 8px;
+  border-bottom-right-radius: 8px 8px;
+  border-top-left-radius: 8px 8px;
+  border-top-right-radius: 8px 8px;
+  line-height: 20px;
+  padding: 0;
+  border-radius: 8px;
+}
+
+menu li:first-child { border-right: 1px solid #530c02 }
+menu li { -webkit-box-flex: 1; list-style-type: none; text-align: center }
+menu a  { display: block; font-weight: bold; color: white; text-decoration: none; padding: 10px; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6D1003), to(#580D02)) }
+menu li:first-child a { border-radius: 0; border-top-left-radius: 8px; border-bottom-left-radius: 8px;}
+menu li:last-child a  { border-radius: 0; border-top-right-radius: 8px; border-bottom-right-radius: 8px }
 
 .tooltip {
   display: none;
@@ -116,6 +138,13 @@ body.landscape .toolbar > h1 {
   background: transparent url(/img/mobile.png) top right no-repeat;
 }
 
+#home h1 a {
+  font-style: none;
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+}
+
 #settings { -webkit-transform: translate3d(0%, -100%, 0%); opacity: 0 }
 
 #results    { display: none }
@@ -133,7 +162,7 @@ body.landscape .toolbar > h1 {
 
 h1, h2 { margin: 10px; text-shadow: rgba(255, 255, 255, 0.19) }
 p, form { margin: 0 10px }
-h2 > a, p > a {
+h2 > a, p > a, a.button {
   -webkit-box-shadow: 1px 1px 0px #000;
   -webkit-border-radius: 0.5em;
   font-style: italic;
@@ -244,7 +273,6 @@ a.back {
   -webkit-border-radius: 8px;
   background: rgba(0, 0, 0, 0.4);
 /*  border-width: 0px 8px 0px 14px;*/
-
   left: 6px;
   max-width: 55px;
   right: auto;
