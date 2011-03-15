@@ -1,6 +1,8 @@
 $(document).ready(function() {
   
   setTimeout(function() { window.scrollTo(0, 0); }, 1000);
+  
+  $(window).bind('orientationchange', function() { scrollTo(0, 0); });
       
   Tip = function(options) {
     var opts = _.extend({ id: 'tip-' + new Date().getTime(), icon: '!', classes: 'notice', duration: 2000 }, options);
@@ -50,6 +52,8 @@ $(document).ready(function() {
       if (!Settings.exists()) {
         $('menu').hide();
         $('#getting-started').show();
+      } else {
+        $('#settings input').val(Settings.get('keywords'));
       }
     },
 
@@ -72,6 +76,7 @@ $(document).ready(function() {
     initialize  : function () {
       Settings.bind('change', function() { 
         $('#getting-started').hide();
+        $('menu').css('display', '-webkit-box');
         Tip({ message: 'Settings updated!', duration: 3000 }); 
       });
     },
@@ -111,7 +116,7 @@ $(document).ready(function() {
       section.addClass('current');
       if (id !== '#home' && !section.find('a.back').length) $(".current .toolbar").prepend('<a class="back"">Back</a>');
       setTimeout(function() {
-        window.scrollTo(0, 0);
+        scrollTo(0, 0);
         if (_.isFunction(callback)) callback();
       }, 250);
     }
