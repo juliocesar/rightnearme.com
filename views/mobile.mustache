@@ -5,7 +5,7 @@
     <link href="/css/mobile.css" media="screen" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="red" />      
+    <meta name="apple-mobile-web-app-status-bar-style" content="red" />
     <meta name="format-detection" content="telephone=no" />
     <script src="http://use.typekit.com/ljl7gkk.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
@@ -18,7 +18,7 @@
       <div id="getting-started" class="tooltip notice important">
         <span class="icon">!</span>
         <p>
-          Start by telling us what are you looking for. 
+          Start by telling us what are you looking for.
           <a href="#!/settings">Go to settings</a>
         </p>
       </div>
@@ -27,10 +27,10 @@
           <a href="#!/settings">Settings</a>
         </li>
         <li>
-          <a href="#!/yourown">Get your own</a>
+          <a href="#!/get-your-own">Get your own</a>
         </li>
       </menu>
-      <h2>
+      <h2 id="now-showing">
         Showing 10 stores closest to you, no keywords specified.
       </h2>
       <ul id="results">
@@ -54,17 +54,54 @@
         </li>
         <li class="arrow">
           <a href="#!/stores/zante">Evening Star Hotel, Elizabeth Street</a>
-        </li>        
+        </li>
       </ul>
     </section>
-    <section id="taste">
+    <section id="get-your-own">
+      <h2>Want your own store?</h2>
+      <p>
+        Right Near Me makes it easy for you to create your online
+        mobile-friendly presence.
+      </p>
+      <p>
+        Sign up for an account, add your inventory, a logo, and you're set.
+      </p>
+      <a class="button">Free</a>
+    </section>
+    <section id="zoe" class="black">
       <div class="toolbar">
-        <h1>Menu 1</h1>
+        <h1>Zoe Surfboards</h1>
       </div>
-      <ul class="menu">
-        <li>SubMenu 1</li>
-        <li>SubMenu 2</li>
-      </ul>
+      <img class="logo" src="/img/zoes.jpg">
+      <p class="address">
+        14 Kippax Street, Surry Hills, Sydney <a href="#">map</a>
+      </p>
+      <p class="description">
+        Makers of the finest surfboards in all of the Pacific! We're located in a trendy spot
+        of Surry Hills, Sydney.
+      </p>
+      <table class="stuff">
+        <tr>
+          <td class="name">5'08" Dominator</td>
+          <td class="price">$920.00</td>
+        </tr>
+        <tr>
+          <td class="name">5'08" Firewire Quadfish</td>
+          <td class="price">$982.26</td>
+        </tr>
+        <tr>
+          <td class="name">5'08" Stretch F4 Quad TL2</td>
+          <td class="price">$822.03</td>
+        </tr>
+        <tr>
+          <td class="name">5'10" Firewire Quadfish</td>
+          <td class="price">$982.26</td>
+        </tr>
+        <tr>
+          <td class="name">6'0" Dominator</td>
+          <td class="price">$920.00</td>
+        </tr>
+      </table>
     </section>
     <section id="settings">
       <div class="toolbar">
@@ -85,11 +122,12 @@
     <script src="/js/zepto.js"></script>
     <script src="/js/underscore-min.js"></script>
     <script src="/js/backbone.js"></script>
-    <script src="/js/mobile.js"></script>      
+    <script src="/js/iscroll-lite.js"></script>
+    <script src="/js/mobile.js"></script>
     <script type="text/template" id="result-template">
       <li class="arrow">
         <a href="#!/stores/<%= username %>"><%= name %>, <%= street %></a>
-      </li>    
+      </li>
     </script>
     <script type="text/template" id="tooltip-template">
       <div class="tooltip floating <%= classes %>" id="<%= id %>">

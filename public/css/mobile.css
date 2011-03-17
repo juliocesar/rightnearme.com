@@ -50,6 +50,18 @@ body > section {
   background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#a51703), to(#BC4F40)), #a51703;
 }
 
+body > section img.logo {
+  -webkit-border-radius: 8px;
+  width: 100px;
+  float: right;
+  margin: 0 10px 5px 5px;
+}
+
+body > section p.address {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 body.landscape .toolbar > h1 {
   margin-left: -125px;
   width: 250px;
@@ -194,6 +206,19 @@ p             { margin-top: 4px; margin-bottom: 8px } /* avoid overriding sides 
   width: 150px;
 }
 
+table.stuff {
+  width: 94%;
+  border-spacing: 0;
+  border: 0;
+  margin: 10px;
+}
+
+table.stuff tr                { background: rgba(0, 0, 0, .3) }
+table.stuff tr:nth-child(odd) { background: rgba(0, 0, 0, .5) }
+table.stuff td.name           { width: 70% }
+table.stuff td.price          { width: 30%; text-align: right }
+table.stuff td                { padding: 10px }
+
 ul {
   background: white;
   border: 1px solid #B4B4B4;
@@ -280,4 +305,12 @@ a.back {
   0%    { -webkit-transform: scale(1) }
   50%   { -webkit-transform: scale(1.1) }
   100%  { -webkit-transform: scale(1) }
+}
+
+/* Themes */
+body > section.black {
+  background: -webkit-gradient(radial, 50% center, 200, 50% center, 40, from(#191919), to(#2a2a2a)), #191919;
+}
+body > section.black .toolbar {
+  background: #1a1a1a;
 }

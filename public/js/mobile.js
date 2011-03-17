@@ -2,6 +2,8 @@ $(document).ready(function() {
   
   setTimeout(function() { window.scrollTo(0, 0); }, 1000);
   
+  localStorage.removeItem('Settings');
+  
   $(window).bind('orientationchange', function() { scrollTo(0, 0); });
       
   Tip = function(options) {
@@ -49,6 +51,7 @@ $(document).ready(function() {
     el              : $('#home'),
     resultTemplate  : _.template($('#result-template').html()),
     initialize: function() {
+      _.bindAll(this, 'search');
       if (!Settings.exists()) {
         $('menu').hide();
         $('#getting-started').show();
@@ -62,9 +65,30 @@ $(document).ready(function() {
       li.css('display', 'block');
       $('#results').show().append(li);
       setTimeout(function() { li.addClass('visible'); }, 1);
+    },
+    
+    clear: function() {
+      $('#results li').remove();
+    },
+    
+    search: function(keywords) {
+      this.clear();
+      if (keywords === 'surf') {
+        for (var i = 0; i < surfseed.length; i++) {
+          (function(result) {
+            setTimeout(function() { HomePage.loadResult(result); }, i * 250);
+          })(surfseed[i]);
+        }                
+      } else {
+        for (var i = 0; i < seed.length; i++) {
+          (function(result) {
+            setTimeout(function() { HomePage.loadResult(result); }, i * 250);
+          })(seed[i]);
+        }        
+      }
     }
   });
-
+  
   HomePage = new HomeView;
   
   var SettingsView = Backbone.View.extend({
@@ -77,7 +101,8 @@ $(document).ready(function() {
       Settings.bind('change', function() { 
         $('#getting-started').hide();
         $('menu').css('display', '-webkit-box');
-        Tip({ message: 'Settings updated!', duration: 3000 }); 
+        Tip({ message: 'Settings updated!', duration: 3000 });
+        HomePage.shouldUpdate = true;
       });
     },
 
@@ -95,6 +120,7 @@ $(document).ready(function() {
     routes: {
       '!/'                  :   'root',
       '!/settings'          :   'settings',
+      '!/get-your-own'      :   'yourown',
       '!/stores/:username'  :   'store'
     },
 
@@ -109,12 +135,21 @@ $(document).ready(function() {
     settings: function() {
       this.navigate('#settings');
     },
+    
+    yourown: function() {
+      this.navigate('#get-your-own');
+    },
 
     navigate: function(id, callback) {
       $('.current').removeClass('current').addClass('reverse');
       var section = $(id);
       section.addClass('current');
       if (id !== '#home' && !section.find('a.back').length) $(".current .toolbar").prepend('<a class="back"">Back</a>');
+      if (id === '#home' && HomePage.shouldUpdate) {
+        HomePage.search('surf');
+        $('#now-showing').html('Showing 4 stores closest to you matching "surf".');
+        HomePage.shouldUpdate = false;
+      }
       setTimeout(function() {
         scrollTo(0, 0);
         if (_.isFunction(callback)) callback();
@@ -126,24 +161,22 @@ $(document).ready(function() {
 
   Controller = new ApplicationController;
   Backbone.history.start();
+  
+  seed = [];
+  seed.push({name: 'Taste Cafe', street: 'Foveaux Street', username: 'taste'});
+  seed.push({name: 'RTA Staff Credit Union', street: 'Kippax Street', username: 'rta'});
+  seed.push({name: 'Rona Leather Fashions', street: 'Foveaux Street', username: 'rona'});
+  seed.push({name: 'BodyMindLife Yoga', street: 'Foveaux Street', username: 'yoga'});
+  seed.push({name: 'Forresters Hotel', street: 'Fitzroy Road', username: 'forresters'});
+  seed.push({name: 'Zante Cafe', street: 'Foveaux Street', username: 'zante'});
+  seed.push({name: 'Evening Star Hotel', street: 'Elizabeth Street', username: 'evening'});
+  
+  surfseed = [];
+  surfseed.push({name: 'Zoe Surfboards', street: 'Kippax Street', username: 'zoe'});
+  surfseed.push({name: 'Surf & Sport Co.', street: 'Foveaux Street', username: 'rta'});
+  surfseed.push({name: 'Blue Waves Boards', street: '', username: 'bluewave'});
+  surfseed.push({name: 'Shane Surfboards', street: 'Sydenham Road', username: 'shane'});
 
 
-  setTimeout(
-    function() {
-      var seed = [];
-      seed.push({name: 'Taste Cafe', street: 'Foveaux Street', username: 'taste'});
-      seed.push({name: 'RTA Staff Credit Union', street: 'Kippax Street', username: 'rta'});
-      seed.push({name: 'Rona Leather Fashions', street: 'Foveaux Street', username: 'rona'});
-      seed.push({name: 'BodyMindLife Yoga', street: 'Foveaux Street', username: 'yoga'});
-      seed.push({name: 'Forresters Hotel', street: 'Fitzroy Road', username: 'forresters'});
-      seed.push({name: 'Zante Cafe', street: 'Foveaux Street', username: 'zante'});
-      seed.push({name: 'Evening Star Hotel', street: 'Elizabeth Street', username: 'evening'});
-      for (var i = 0; i < seed.length; i++) {
-        (function(result) {
-          setTimeout(function() { HomePage.loadResult(result); }, i * 250);
-        })(seed[i]);
-      }
-    },
-    3000
-  );
+  setTimeout(function() { HomePage.search('surf'); },3000);
 });
