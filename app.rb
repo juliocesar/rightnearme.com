@@ -21,6 +21,14 @@ configure do
   enable :sessions
 end
 
+get '/stores' do
+  content_type :json
+  @location = params[:location].split(',').map(&:to_f) # [0] lat - [1] lng
+  @keywords = params[:keywords].split(/\s+/).join('|')
+  @stores = Store.where(:latlng.near => @location, :description => /#{@keywords}/i)
+  @stores.to_json methods: [:id]
+end
+
 get '/mystore' do
   redirect '/mystore/'
 end
@@ -83,14 +91,14 @@ put '/profile.js' do
   @store = Store.last
   @store.safe_update params
   @json = @store.to_json_with_defaults
-  mustache :profile, { :layout => false }, { :json => @json }
+  mustache :profile, { layout: false }, { json: @json }
 end
 
-put '/settings.json' do
-  attributes = parse_json_request
+put '/settings' do
+  settings = parse_json_request
   content_type :json
   @store = Store.last
-  @store.update_settings attributes
+  @store.update_attributes settings: settings
   @store.settings.to_json
 end
 

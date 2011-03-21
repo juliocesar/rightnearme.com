@@ -8,6 +8,7 @@ require 'yaml'
 require 'carrierwave'
 require 'carrierwave/orm/mongoid'
 require 'mustache/sinatra'
+require 'geokit'
 
 Sinatra::Application.register Mustache::Sinatra
 

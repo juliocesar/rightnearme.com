@@ -7,8 +7,13 @@ require 'machinist'
 require 'machinist/mongoid'
 require File.dirname(__FILE__) + '/../config/boot'
 
+Mongoid.logger.level = 5 # sshhhh
+
 RSpec.configure do |config|
-  config.before(:each) { Machinist.reset_before_test }
+  config.before(:each) do 
+    Machinist.reset_before_test
+    Store.delete_all
+  end
 end
 
 Store.blueprint do
@@ -16,6 +21,7 @@ Store.blueprint do
   email       { Faker::Internet.email }
   description { Faker::Lorem.paragraph(1 + rand(3)) }
   location    { Faker::Address.street_address }
+  latlng      { [150.15, 150.15] }
 end
 
 Store.blueprint :empty do

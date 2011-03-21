@@ -173,10 +173,10 @@ $(document).ready(function() {
   
   surfseed = [];
   surfseed.push({name: 'Zoe Surfboards', street: 'Kippax Street', username: 'zoe'});
-  surfseed.push({name: 'Surf & Sport Co.', street: 'Foveaux Street', username: 'rta'});
-  surfseed.push({name: 'Blue Waves Boards', street: '', username: 'bluewave'});
+  surfseed.push({name: 'Surf & Sport Co', street: 'Foveaux Street', username: 'rta'});
+  surfseed.push({name: 'Blue Waves Boards', street: 'Something Street', username: 'bluewave'});
   surfseed.push({name: 'Shane Surfboards', street: 'Sydenham Road', username: 'shane'});
 
 
-  setTimeout(function() { HomePage.search('surf'); },3000);
+  setTimeout(function() { HomePage.search(); }, 3000);
 });

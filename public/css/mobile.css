@@ -51,10 +51,17 @@ body > section {
 }
 
 body > section img.logo {
+  position: relative;
   -webkit-border-radius: 8px;
   width: 100px;
   float: right;
   margin: 0 10px 5px 5px;
+}
+
+body > section img.logo:after {
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, .3);
 }
 
 body > section p.address {
@@ -172,7 +179,7 @@ menu li:last-child a  { border-radius: 0; border-top-right-radius: 8px; border-b
 
 h1, h2 { margin: 10px; text-shadow: rgba(255, 255, 255, 0.19) }
 p, form { margin: 0 10px }
-h2 > a, p > a, a.button {
+h2 > a, p > a, p > a.button {
   -webkit-box-shadow: 1px 1px 0px #000;
   -webkit-border-radius: 0.5em;
   font-style: italic;
@@ -184,6 +191,7 @@ h2 > a, p > a, a.button {
   padding: 0.15em 0.25em;
   text-decoration: none;
 }
+p > a.button  { position: static }
 h1, h2, p     { text-shadow: 1px 1px 0 #000 }
 p:first-child { margin-top: 0 }
 p             { margin-top: 4px; margin-bottom: 8px } /* avoid overriding sides margin */

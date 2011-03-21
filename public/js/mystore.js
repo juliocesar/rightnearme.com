@@ -136,7 +136,7 @@ $(document).ready(function() {
   ProductsView = new ProductsUI;
   
   Settings = Backbone.Model.extend({
-    url : '/settings.json',
+    url : '/settings',
     isNew: function() {
       return false; // stores will always have 1 Setting associated
     }

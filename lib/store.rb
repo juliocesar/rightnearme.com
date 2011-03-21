@@ -1,5 +1,5 @@
-class Store
-  Settings = %w(visible theme)
+class Store  
+  SettingsAllowed = %w(visible theme)
   
   include Mongoid::Document
   field :email
@@ -7,10 +7,15 @@ class Store
   field :description
   field :location
   field :icon
+  field :latlng, :type => Array
   field :settings, :type => Hash
   embeds_many :products
+  index [[ :latlng, Mongo::GEO2D ]]
   
   mount_uploader :icon, IconUploader
+  
+  before_save :geocode
+  before_save :filter_invalid_settings
   
   validates_presence_of :email, :name, :description, :location
   
@@ -26,8 +31,15 @@ class Store
       icon: attrs[:icon]
   end
   
-  def update_settings attrs
-    attrs.delete_if { |attribute| not Settings.include? attribute }
-    update_attributes :settings => attrs
+  def filter_invalid_settings
+    return if settings.blank?
+    self.settings.delete_if { |attribute| not SettingsAllowed.include? attribute }
+  end
+  
+  private
+  def geocode
+    return unless (new? and latlng.blank?) or (!new? and changes['location'])
+    response = Geokit::Geocoders::GoogleGeocoder.geocode location
+    self.latlng = [response.lat, response.lng]
   end
 end
