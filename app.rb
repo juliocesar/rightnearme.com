@@ -1,5 +1,15 @@
 require File.dirname(__FILE__) + '/config/boot'
 
+FLOATRX = /[-+]?([0-9]*\.[0-9]+|[0-9]+)/
+
+def valid_location?
+  !params[:location].blank? and /#{FLOATRX},#{FLOATRX}/.match params[:location]
+end
+
+def valid_keywords?
+  !params[:keywords].blank? and params[:keywords].split(/\s+/).any?
+end
+
 def parse_json_request
   request.body.rewind
   JSON.parse request.body.read
@@ -23,9 +33,11 @@ end
 
 get '/stores' do
   content_type :json
-  @location = params[:location].split(',').map(&:to_f) # [0] lat - [1] lng
-  @keywords = params[:keywords].split(/\s+/).join('|')
-  @stores = Store.where(:latlng.near => @location, :description => /#{@keywords}/i)
+  criteria, selector = Mongoid::Criteria.new(Store), {}
+  selector[:latlng] = { '$near' => params[:location].split(',').map(&:to_f) } if valid_location?
+  selector[:description] = /#{params[:keywords].split(/\s+/).join('|')}/ if valid_keywords?
+  criteria.selector = selector
+  @stores = criteria.all
   @stores.to_json methods: [:id]
 end
 

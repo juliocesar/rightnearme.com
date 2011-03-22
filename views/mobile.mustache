@@ -12,7 +12,7 @@
   </head>
   <body>
     <section id="home">
-      <h1>
+      <h1 id="rnm">
         Right Near Me
       </h1>
       <div id="getting-started" class="tooltip notice important">
@@ -30,32 +30,38 @@
           <a href="#!/get-your-own">Get your own</a>
         </li>
       </menu>
-      <h2 id="now-showing">
-        Showing 10 stores closest to you, no keywords specified.
-      </h2>
-      <ul id="results">
-        <li class="arrow">
-          <a href="#!/stores/taste">Taste Café, Foveaux Street</a>
-        </li>
-        <li class="arrow">
-          <a href="#!/stores/surf">RTA Staff Credit Union, Kippax Street</a>
-        </li>
-        <li class="arrow">
-          <a href="#!/stores/rona">Rona Leather Fashions, Foveaux Street</a>
-        </li>
-        <li class="arrow">
-          <a href="#!/stores/yoga">BodyMindLife Yoga, Foveaux Street</a>
-        </li>
-        <li class="arrow">
-          <a href="#!/stores/music">Forresters Hotel, Fitzroy Road</a>
-        </li>
-        <li class="arrow">
-          <a href="#!/stores/zante">Zante Cafe, Foveaux Street</a>
-        </li>
-        <li class="arrow">
-          <a href="#!/stores/zante">Evening Star Hotel, Elizabeth Street</a>
-        </li>
-      </ul>
+      <div id="loading">
+        <h1>Loading</h1>
+        <div id="ball"></div>
+      </div>
+      <div id="results-wrapper">
+        <h2 id="now-showing">
+          Showing 10 stores closest to you, no keywords specified.
+        </h2>
+        <ul id="results">
+          <li class="arrow">
+            <a href="#!/stores/taste">Taste Café, Foveaux Street</a>
+          </li>
+          <li class="arrow">
+            <a href="#!/stores/surf">RTA Staff Credit Union, Kippax Street</a>
+          </li>
+          <li class="arrow">
+            <a href="#!/stores/rona">Rona Leather Fashions, Foveaux Street</a>
+          </li>
+          <li class="arrow">
+            <a href="#!/stores/yoga">BodyMindLife Yoga, Foveaux Street</a>
+          </li>
+          <li class="arrow">
+            <a href="#!/stores/music">Forresters Hotel, Fitzroy Road</a>
+          </li>
+          <li class="arrow">
+            <a href="#!/stores/zante">Zante Cafe, Foveaux Street</a>
+          </li>
+          <li class="arrow">
+            <a href="#!/stores/zante">Evening Star Hotel, Elizabeth Street</a>
+          </li>
+        </ul>
+      </div>
     </section>
     <section id="get-your-own">
       <h2>Want your own store?</h2>

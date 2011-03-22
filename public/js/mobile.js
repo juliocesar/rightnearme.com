@@ -1,8 +1,5 @@
 $(document).ready(function() {
-  
   setTimeout(function() { window.scrollTo(0, 0); }, 1000);
-  
-  localStorage.removeItem('Settings');
   
   $(window).bind('orientationchange', function() { scrollTo(0, 0); });
       
@@ -65,6 +62,22 @@ $(document).ready(function() {
       li.css('display', 'block');
       $('#results').show().append(li);
       setTimeout(function() { li.addClass('visible'); }, 1);
+    },
+    
+    showLoading: function() {
+      $('#results-wrapper').removeClass('visible');
+      setTimeout(function() {
+        $('#loading').show();
+        $('#loading').addClass('visible');
+      }, 260);
+    },
+    
+    hideLoading: function() {
+      $('#loading').removeClass('visible');
+      setTimeout(function() {
+        $('#loading').hide();
+        $('#results-wrapper').show().addClass('visible')
+      }, 260);
     },
     
     clear: function() {

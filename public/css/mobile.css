@@ -1,5 +1,13 @@
 * { margin: 0px; padding: 0px }
 
+#results-wrapper          { -webkit-transition: all 0.25s linear; opacity: 0 }
+#results-wrapper.visible  { opacity: 1 }
+#loading          { -webkit-transition: all 0.25s linear; display: block; text-align: center; margin-top: 50px; opacity: 0; pointer-events: none }
+#loading.visible  { opacity: 1 }
+#loading h1       { color: #6D1003; font-size: 2em; text-transform: uppercase }
+#ball             { -webkit-animation: rotates 1s infinite linear; display: inline-block; height: 30px; width: 30px; border-radius: 18px; border: 4px dashed #6D1003 }
+
+
 form input,
 form textarea {
   -webkit-border-radius: 0;
@@ -148,7 +156,7 @@ menu li:last-child a  { border-radius: 0; border-top-right-radius: 8px; border-b
 .tooltip p        { margin: 0 10px }
 .tooltip.visible  { }
 
-#home h1:first-child  {
+#rnm {
   text-align: center;
   display: inline-block;
   padding: 4px 55px 0 0;
@@ -313,6 +321,16 @@ a.back {
   0%    { -webkit-transform: scale(1) }
   50%   { -webkit-transform: scale(1.1) }
   100%  { -webkit-transform: scale(1) }
+}
+
+@-webkit-keyframes rotates {
+  0%    { -webkit-transform: rotate(0deg) }
+  100%  { -webkit-transform: rotate(360deg) }
+}
+
+@-webkit-keyframes fadesout {
+  0%    { -webkit-transform: opacity: 1 }
+  100%  { -webkit-transform: opacity: 0; display: none }
 }
 
 /* Themes */
