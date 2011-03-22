@@ -39,27 +39,6 @@
           Showing 10 stores closest to you, no keywords specified.
         </h2>
         <ul id="results">
-          <li class="arrow">
-            <a href="#!/stores/taste">Taste Café, Foveaux Street</a>
-          </li>
-          <li class="arrow">
-            <a href="#!/stores/surf">RTA Staff Credit Union, Kippax Street</a>
-          </li>
-          <li class="arrow">
-            <a href="#!/stores/rona">Rona Leather Fashions, Foveaux Street</a>
-          </li>
-          <li class="arrow">
-            <a href="#!/stores/yoga">BodyMindLife Yoga, Foveaux Street</a>
-          </li>
-          <li class="arrow">
-            <a href="#!/stores/music">Forresters Hotel, Fitzroy Road</a>
-          </li>
-          <li class="arrow">
-            <a href="#!/stores/zante">Zante Cafe, Foveaux Street</a>
-          </li>
-          <li class="arrow">
-            <a href="#!/stores/zante">Evening Star Hotel, Elizabeth Street</a>
-          </li>
         </ul>
       </div>
     </section>
@@ -133,9 +112,15 @@
     <script src="/js/iscroll-lite.js"></script>
     <script src="/js/mobile.js"></script>
     <script type="text/template" id="result-template">
-      <li class="arrow">
-        <a href="#!/stores/<%= username %>"><%= name %>, <%= street %></a>
-      </li>
+      <a href="#!/stores/<%= id %>"><%= name %>, <%= location %></a>
+    </script>
+    <script type="text/template" id="now-showing-template">
+      Showing <%= count %> stores closest to you, 
+      <% if (Settings.attributes.keywords && Settings.attributes.keywords !== '') { %>
+        with "<%= Settings.attributes.keywords %>" specified.
+      <% } else { %>
+        no keywords specified.
+      <% } %>
     </script>
     <script type="text/template" id="tooltip-template">
       <div class="tooltip floating <%= classes %>" id="<%= id %>">

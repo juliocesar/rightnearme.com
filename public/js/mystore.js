@@ -140,8 +140,7 @@ $(document).ready(function() {
     isNew: function() {
       return false; // stores will always have 1 Setting associated
     }
-  });
-  
+  });  
   
   SettingsUI = Backbone.View.extend({
     el      : $('#settings'),
@@ -185,7 +184,6 @@ $(document).ready(function() {
       $('#current-store').html(this.template(Store.toJSON()));
     },
     renderWith: function(attributes) {
-      window.those = attributes;
       $('#current-store').html(this.template(attributes));
     }
   });

@@ -171,16 +171,7 @@ menu li:last-child a  { border-radius: 0; border-top-right-radius: 8px; border-b
 }
 
 #settings { -webkit-transform: translate3d(0%, -100%, 0%); opacity: 0 }
-
 #results    { display: none }
-#results li {
-  -webkit-transition: opacity 0.25s ease-out;
-  -webkit-transform-style: preserve-3d;
-  display: none;
-  opacity: 0;
-}
-#results li.visible { opacity: 1 }
-
 #settings form        { margin-bottom: 10px }
 #settings form input  { width: 260px; font-size: 20px }
 #settings label       { display: block; font-size: 24px }
