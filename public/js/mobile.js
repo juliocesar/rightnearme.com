@@ -78,7 +78,7 @@ $(document).ready(function() {
       Settings.exists() ? $('#settings input').val(Settings.get('keywords')) : $('menu').hide() && $('#getting-started').show();
       var self = this;
       navigator.geolocation.getCurrentPosition(function(position) {
-        Session.position = position;
+        Session.position = position.coords;
         self.refresh();
       });
       Stores.bind('add',      this.addOne);
@@ -95,8 +95,8 @@ $(document).ready(function() {
       this.showLoading();
       this.clear();
       Stores.fetch({
-        success:  this.hideLoading,
-        data:     { location: [Session.position.latitude, Session.position.longitude].join(','), keywords: Settings.attributes.keywords }
+        success :   this.hideLoading,
+        url     :   '/stores?latlng=' + [Session.position.latitude, Session.position.longitude].join(',') + '&keywords=' + Settings.attributes.keywords
       });
     },
     
@@ -197,21 +197,4 @@ $(document).ready(function() {
 
   Controller = new ApplicationController;
   Backbone.history.start();
-
-  seed = [];
-  seed.push({name: 'Taste Cafe', street: 'Foveaux Street', username: 'taste'});
-  seed.push({name: 'RTA Staff Credit Union', street: 'Kippax Street', username: 'rta'});
-  seed.push({name: 'Rona Leather Fashions', street: 'Foveaux Street', username: 'rona'});
-  seed.push({name: 'BodyMindLife Yoga', street: 'Foveaux Street', username: 'yoga'});
-  seed.push({name: 'Forresters Hotel', street: 'Fitzroy Road', username: 'forresters'});
-  seed.push({name: 'Zante Cafe', street: 'Foveaux Street', username: 'zante'});
-  seed.push({name: 'Evening Star Hotel', street: 'Elizabeth Street', username: 'evening'});
-
-  surfseed = [];
-  surfseed.push({name: 'Zoe Surfboards', street: 'Kippax Street', username: 'zoe'});
-  surfseed.push({name: 'Surf & Sport Co', street: 'Foveaux Street', username: 'rta'});
-  surfseed.push({name: 'Blue Waves Boards', street: 'Something Street', username: 'bluewave'});
-  surfseed.push({name: 'Shane Surfboards', street: 'Sydenham Road', username: 'shane'});
-
-  // setTimeout(function() { HomePage.search(); }, 3000);
 });

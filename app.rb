@@ -37,6 +37,8 @@ get '/stores' do
   selector[:latlng] = { '$near' => params[:location].split(',').map(&:to_f) } if valid_location?
   selector[:description] = /#{params[:keywords].split(/\s+/).join('|')}/ if valid_keywords?
   criteria.selector = selector
+  puts "GOT: #{selector.inspect}"
+  puts "PARAMS: #{params.inspect}"
   @stores = criteria.all
   @stores.to_json methods: [:id]
 end
