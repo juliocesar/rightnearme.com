@@ -111,15 +111,41 @@
     <script src="/js/backbone.js"></script>
     <script src="/js/iscroll-lite.js"></script>
     <script src="/js/mobile.js"></script>
+    <script type="text/template" id="store-template">
+      <div class="toolbar">
+        <h1><%= name %></h1>
+      </div>
+      <img class="logo" src="<%= logo %>">
+      <p class="address">
+        <%= location %>
+      </p>
+      <p class="description">
+        <%= description %>
+      </p>
+      <table class="stuff">
+        <% for (var i = 0; products.length > i; i++) { %>
+          <td class="name"><%= products[i].name %></td><td class="price"><%= products[i].price %></td>
+        <% } %>
+      </table>      
+    </script>
     <script type="text/template" id="result-template">
       <a href="#!/stores/<%= id %>"><%= name %>, <%= location %></a>
     </script>
     <script type="text/template" id="now-showing-template">
-      Showing <%= count %> stores closest to you, 
-      <% if (Settings.attributes.keywords && Settings.attributes.keywords !== '') { %>
-        with "<%= Settings.attributes.keywords %>" specified.
+      <% if (count === 0) { %>
+        Couldn't find any stores near you. Try
+        <% if (!Settings.get('keywords')) { %>
+          specifying one or more keywords.
+        <% } else { %>
+          adding more keywords to the search.
+        <% } %>
       <% } else { %>
-        no keywords specified.
+        Showing <%= count %> store <%= count == 1 ? '' : 's' %> closest to you, 
+        <% if (Settings.get('keywords') && Settings.get('keywords') !== '') { %>
+          with "<%= Settings.attributes.keywords %>" specified.
+        <% } else { %>
+          no keywords specified.
+        <% } %>
       <% } %>
     </script>
     <script type="text/template" id="tooltip-template">

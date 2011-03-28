@@ -75,7 +75,7 @@ $(document).ready(function() {
     resultTemplate  : _.template($('#result-template').html()),
     initialize: function() {
       _.bindAll(this, 'search', 'clear', 'refresh', 'addOne', 'addAll');
-      Settings.exists() ? $('#settings input').val(Settings.get('keywords')) : $('menu').hide() && $('#getting-started').show();
+      Settings.exists() ? $('#settings input').val(Settings.get('keywords') || '') : $('menu').hide() && $('#getting-started').show();
       var self = this;
       navigator.geolocation.getCurrentPosition(function(position) {
         Session.position = position.coords;
@@ -96,7 +96,9 @@ $(document).ready(function() {
       this.clear();
       Stores.fetch({
         success :   this.hideLoading,
-        url     :   '/stores?latlng=' + [Session.position.latitude, Session.position.longitude].join(',') + '&keywords=' + Settings.attributes.keywords
+        url     :   '/stores?latlng=' + 
+          [Session.position.latitude, Session.position.longitude].join(',') + 
+          (Settings.get('keywords') ? '&keywords=' + Settings.get('keywords') : '')
       });
     },
     
