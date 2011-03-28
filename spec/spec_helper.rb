@@ -12,6 +12,9 @@ Mongoid.logger.level = 5 # sshhhh
 RSpec.configure do |config|
   config.before(:each) do 
     Machinist.reset_before_test
+  end
+  
+  config.after :all do
     Store.delete_all
   end
 end
